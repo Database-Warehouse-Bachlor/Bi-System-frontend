@@ -13,6 +13,7 @@ import { ErrorMessage, Field, Form, Formik } from "formik";
 import React from "react";
 import { RouteComponentProps } from "react-router-dom";
 import { object, string } from "yup";
+import AuthenticationService from "../Services/AuthenticationService"
 
 
 const useStyles = makeStyles({
@@ -49,23 +50,35 @@ export const Login: React.FC<Props> = ({ history }) => {
       <CardContent>
         <Formik
           initialValues={{
-            Email: "",
-            APIKey: "",
+            email: "",
+            pwd: "",
           }}
           validationSchema={object({
-            Email: string().required().email(),
-            APIKey: string().required(),
+            email: string().required().email(),
+            pwd: string().required(),
           })}
           onSubmit={async (values) => {
             /** A timer of 3 sec that disables the submit button - Somewhat prevents serverspam */
             return new Promise<void>((res) => {
               setTimeout(() => {
-                //API call & checks
+                //API call & checks  
+                AuthenticationService.login(values.email, values.pwd)
+                .then(
+                  user => {
+                    history.push("/Dashboard");
+                                },
+                                error => {
+                                    //setSubmitting(false);
+                                    //setStatus(error);
+                                    console.log("feil")
+                                }
+                            );
+                //console.log("response", Response)                
                 console.log("my values", values);
-                history.push("/Dashboard");
+                
 
                 res();
-              }, 3000);
+              }, 300);
             });
           }}
         >
@@ -73,7 +86,7 @@ export const Login: React.FC<Props> = ({ history }) => {
             <Form>
               <div className={classes.loginForm}>
                 <Field
-                  name="Email"
+                  name="email"
                   type="Email"
                   label="Email"
                   as={TextField}
@@ -86,8 +99,8 @@ export const Login: React.FC<Props> = ({ history }) => {
               </ErrorMessage>
               <div className={classes.loginForm}>
                 <Field 
-                name="APIKey" 
-                label="API-Key" 
+                name="pwd" 
+                label="Password" 
                 as={TextField} />
                 <ErrorMessage name ="APIKey">
                 {message => (
@@ -117,3 +130,4 @@ export const Login: React.FC<Props> = ({ history }) => {
   );
 };
 export default Login;
+

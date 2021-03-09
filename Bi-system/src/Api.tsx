@@ -3,18 +3,18 @@ import { useEffect, useState } from "react";
 function MyComponent() {
     const [error, setError] = useState(null);
     const [isLoaded, setIsLoaded] = useState(false);
-    const [items, setItems] = useState([]);
+    const [token, setToken] = useState([]);
   
     // Note: the empty deps array [] means
     // this useEffect will run once
     // similar to componentDidMount()
     useEffect(() => {
-      fetch("https://api.example.com/items")
+      fetch("https://localhost:5001/api/login")
         .then(res => res.json())
         .then(
           (result) => {
             setIsLoaded(true);
-            setItems(result);
+            setToken(result);
           },
           // Note: it's important to handle errors here
           // instead of a catch() block so that we don't swallow
@@ -27,18 +27,19 @@ function MyComponent() {
     }, [])
   
     if (error) {
-      return <div>Error: {error.message}</div>;
+      return <div>Error: {"feil"}</div>;
     } else if (!isLoaded) {
       return <div>Loading...</div>;
     } else {
       return (
-        <ul>
-          {items.map(item => (
-            <li key={item.id}>
-              {item.name} {item.price}
-            </li>
-          ))}
-        </ul>
+          <ul>correct</ul>
+        // <ul>
+        //   {user.map(users => (
+        //     <li key={user.id}>
+        //       {item.name} {item.price}
+        //     </li>
+        //   ))}
+        // </ul>
       );
     }
   }
