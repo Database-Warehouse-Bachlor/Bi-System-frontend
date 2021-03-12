@@ -70,7 +70,9 @@ export const Login: React.FC<Props> = ({ history }) => {
                       (user) => {
                         history.push("/Dashboard");
                       },
-                      
+                      (error) => {
+                        console.log("feil")
+                      }
                     );
                   //console.log("response", Response)
                   console.log("my values", values);
