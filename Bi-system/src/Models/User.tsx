@@ -1,4 +1,5 @@
 export class User {
+    
 
     //Fields 
     orgnr: string
@@ -12,3 +13,7 @@ export class User {
        this.password = password
 
     }}
+
+    function orgnr() {
+       return orgnr
+    }

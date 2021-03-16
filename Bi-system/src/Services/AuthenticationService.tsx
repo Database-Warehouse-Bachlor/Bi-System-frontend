@@ -22,12 +22,12 @@ function login(email: string, pwd: string) {
 
     return fetch(`/login`, requestOptions)
         .then(handleResponse)
-        .then(user => {
+        .then(token => {
             // store user details and jwt token in local storage to keep user logged in between page refreshes
-            localStorage.setItem('currentUser', (user));
-            console.log("token or user is ", user)
-            currentUserSubject.next(user);
-            return user;
+            localStorage.setItem('currentUser', (token));
+            console.log("token or user is ", token)
+            currentUserSubject.next(token);
+            return token;
         });
 }
 
