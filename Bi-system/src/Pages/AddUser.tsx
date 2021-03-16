@@ -15,6 +15,7 @@ import { RouteComponentProps } from "react-router-dom";
 import { object, string } from "yup";
 import { User } from "../Models/User";
 import AddUserService from "../Services/AddUserService";
+import AuthenticationService from "../Services/AuthenticationService";
 
 const useStyles = makeStyles({
   button: {
@@ -67,6 +68,7 @@ export const Login: React.FC<Props> = ({ history }) => {
               return new Promise<void>((res) => {
                 setTimeout(() => {
                   //API call & checks
+                  console.log("tokencheck", AuthenticationService.getCurrentUser("currentUser"))
                   AddUserService.register("12341234", values.email, values.pwd)
                     .then((response) => {
                       //console.log(response.text());

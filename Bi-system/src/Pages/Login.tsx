@@ -68,6 +68,7 @@ export const Login: React.FC<Props> = ({ history }) => {
                     })
                     .then(
                       (user) => {
+                        console.log("Token: ", AuthenticationService.getCurrentUser("currentUser"))
                         history.push("/Dashboard");
                       },
                       (error) => {
