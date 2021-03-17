@@ -4,8 +4,20 @@ import AuthenticationService from "./AuthenticationService";
 
 export const AddUser = {
   register,
+  getOrgNr
 };
 
+function getOrgNr(){
+  return fetch('/getOrgNr',
+  {
+    method: "GET",
+  })
+  .then((response) => response.json())
+  .then((responseData) => {
+    console.log(responseData);
+    return responseData;
+  })
+}
 function register(orgnr: string, email: string, pwd: string) {
   const requestOptions = {
     method: "POST",

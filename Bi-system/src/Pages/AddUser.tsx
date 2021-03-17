@@ -69,6 +69,7 @@ export const Login: React.FC<Props> = ({ history }) => {
                 setTimeout(() => {
                   //API call & checks
                   console.log("tokencheck", AuthenticationService.getCurrentUser("currentUser"))
+                  console.log(AddUserService.getOrgNr())
                   AddUserService.register("12341234", values.email, values.pwd)
                     .then((response) => {
                       //console.log(response.text());
