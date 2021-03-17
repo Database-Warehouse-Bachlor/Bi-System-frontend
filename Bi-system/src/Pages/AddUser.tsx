@@ -13,6 +13,8 @@ import { ErrorMessage, Field, Form, Formik } from "formik";
 import React from "react";
 import { RouteComponentProps } from "react-router-dom";
 import { object, string } from "yup";
+import { User } from "../Models/User";
+import AddUserService from "../Services/AddUserService";
 import AuthenticationService from "../Services/AuthenticationService";
 
 const useStyles = makeStyles({
@@ -37,6 +39,11 @@ const useStyles = makeStyles({
   },
 });
 
+const Results = () => (
+  <div id="results" className="search-results">
+    Some Results
+  </div>
+)
 interface Props extends RouteComponentProps {}
 
 export const Login: React.FC<Props> = ({ history }) => {
@@ -44,10 +51,11 @@ export const Login: React.FC<Props> = ({ history }) => {
   return (
     <Grid container justify="center" className={classes.loginCard}>
       <Card className="LoginCard">
-        <CardHeader title="Login" className={classes.cardTitle} />
+        <CardHeader title="Legg Til Bruker" className={classes.cardTitle} />
         <CardContent>
           <Formik
             initialValues={{
+              orgnr: "",
               email: "",
               pwd: "",
             }}
@@ -60,19 +68,19 @@ export const Login: React.FC<Props> = ({ history }) => {
               return new Promise<void>((res) => {
                 setTimeout(() => {
                   //API call & checks
-                  AuthenticationService.login(values.email, values.pwd)
-                    .then(response => {
+                  console.log("tokencheck", AuthenticationService.getCurrentUser("currentUser"))
+                  AddUserService.register("12341234", values.email, values.pwd)
+                    .then((response) => {
                       //console.log(response.text());
 
                       return response;
                     })
                     .then(
                       (user) => {
-                        console.log("Token: ", AuthenticationService.getCurrentUser("currentUser"))
-                        history.push("/Dashboard");
+                        <Results/>
                       },
                       (error) => {
-                        console.log("feil")
+                        console.log("feil");
                       }
                     );
                   //console.log("response", Response)
@@ -117,7 +125,7 @@ export const Login: React.FC<Props> = ({ history }) => {
                     ) : undefined
                   }
                 >
-                  {isSubmitting ? "Submitting" : "Login"}
+                  {isSubmitting ? "Submitting" : "Legg til"}
                 </Button>
               </Form>
             )}

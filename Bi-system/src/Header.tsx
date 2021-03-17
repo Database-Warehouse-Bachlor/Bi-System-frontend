@@ -79,6 +79,10 @@ const Header: React.FC<Props> = ({ history }) => {
       pageTitle: "Kontakt oss",
       pageURL: "/contact",
     },
+    {
+      pageTitle: "Legg Til Bruker",
+      pageURL: "/AddUser",
+    },
   ];
 
   return (
