@@ -43,7 +43,7 @@ const Results = () => (
   <div id="results" className="search-results">
     Some Results
   </div>
-)
+);
 interface Props extends RouteComponentProps {}
 
 export const Login: React.FC<Props> = ({ history }) => {
@@ -66,29 +66,26 @@ export const Login: React.FC<Props> = ({ history }) => {
             onSubmit={async (values) => {
               /** A timer of 3 sec that disables the submit button - Somewhat prevents serverspam */
               return new Promise<void>((res) => {
-                setTimeout(() => {
+                setTimeout(async () => {
                   //API call & checks
-                  console.log("tokencheck", AuthenticationService.getCurrentUser("currentUser"))
-                  console.log(AddUserService.getOrgNr())
-                  AddUserService.register("12341234", values.email, values.pwd)
+                  AddUserService.register(
+                    await AddUserService.getOrgNr(),
+                    values.email,
+                    values.pwd
+                  )
                     .then((response) => {
-                      //console.log(response.text());
-
                       return response;
                     })
                     .then(
                       (user) => {
-                        <Results/>
+                        <Results />;
                       },
                       (error) => {
                         console.log("feil");
                       }
                     );
-                  //console.log("response", Response)
-                  console.log("my values", values);
-
                   res();
-                }, 300);
+                }, 500);
               });
             }}
           >

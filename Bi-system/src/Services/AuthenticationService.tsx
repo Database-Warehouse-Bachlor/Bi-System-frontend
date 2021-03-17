@@ -49,6 +49,7 @@ function login(email: string, pwd: string) {
             console.log("token is ", token)
             currentUserSubject.next(token);
             return token;
+      
         });
 }
 
