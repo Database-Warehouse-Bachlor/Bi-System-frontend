@@ -3,11 +3,13 @@ import BarChart from "../Components/BarChart";
 import LineBarChart from "../Components/LineBarChart";
 import PieChart from "../Components/PieChart";
 import { Paper } from "@material-ui/core";
+import React from "react";
+import AbcenseRegisterChart from "../Components/AbcenseRegisterChart";
 function Dashboard() {
     return (      <Grid row={true}>
     <Grid column={true} sm={12} md={12} justify={"flex-end"}alignItems={"stretch"}   >
       <Paper>
-        <LineBarChart/>
+        <LineBarChart />
       </Paper>
     </Grid>
     <Grid  alignItems={"stretch"} column={true} sm={12} md={4}>
@@ -17,7 +19,7 @@ function Dashboard() {
     </Grid>
     <Grid column={true} sm={12} md={4} alignItems={"center"} >
       <Paper>
-      <BarChart/>
+      <AbcenseRegisterChart/>
       </Paper>
     </Grid>
    

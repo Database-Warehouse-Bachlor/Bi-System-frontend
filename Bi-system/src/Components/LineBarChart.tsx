@@ -1,15 +1,29 @@
 import React, { PureComponent } from 'react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend } from 'recharts';
-var currentMonth: string[] = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December", ];
+var currentMonth: string[] = ["Januar", "Februar", "Mars", "April", "Mai", "Juni", "Juli", "August", "September", "Oktober", "November", "Desember","Januar", "Februar", "Mars", "April", "Mai", "Juni", "Juli", "August", "September", "Oktober", "November", "Desember" ];
 var month = new Date();  
-var crrentMonth = currentMonth[month.getMonth()]; 
-var secoundMonth = currentMonth[month.getMonth()+1];  
-var thirdMonth = currentMonth[month.getMonth()+2];  
-var forthMonth = currentMonth[month.getMonth()+3];  
-var fifthMonth = currentMonth[month.getMonth()+4];  
-var sixthMonth = currentMonth[month.getMonth()+5];  
-var seventhMonth = currentMonth[month.getMonth()+6];  
+var crrentMonth = currentMonth[month.getMonth()+1]; 
+var secoundMonth = currentMonth[month.getMonth()+2];  
+var thirdMonth = currentMonth[month.getMonth()+3];  
+var forthMonth = currentMonth[month.getMonth()+4];  
+var fifthMonth = currentMonth[month.getMonth()+5];  
+var sixthMonth = currentMonth[month.getMonth()+6];  
+var seventhMonth = currentMonth[month.getMonth()+7];  
+var eigthMonth = currentMonth[month.getMonth()+8];  
+var ninethMonth = currentMonth[month.getMonth()+9];  
+var tenthMonth = currentMonth[month.getMonth()+10];  
+var eleventhMonth = currentMonth[month.getMonth()+11];  
+var twelvthMonth = currentMonth[month.getMonth()+12];  
 
+const renderCustomizedLabel = ({
+ 
+}) => {
+  return (
+    <text x={1} y={1} fill="black" textAnchor="end" dominantBaseline="central">
+      {"Accounts receivable"}
+    </text>
+  );
+};
 const data = [
   
   {
@@ -61,6 +75,41 @@ const data = [
     '60-90': 2100,
     'Over 90': 3123,
   },
+  {
+    name: eigthMonth,
+    '1-30': 2780,
+    '30-60': 3908,
+    '60-90': 2000,
+    'Over 90': 6123,
+  },
+  {
+    name: ninethMonth,
+    '1-30': 3490,
+    '30-60': 4300,
+    '60-90': 2100,
+    'Over 90': 3123,
+  },
+  {
+    name: tenthMonth,
+    '1-30': 1890,
+    '30-60': 4800,
+    '60-90': 2181,
+    'Over 90': 7123,
+  },
+  {
+    name: eleventhMonth,
+    '1-30': 3490,
+    '30-60': 4300,
+    '60-90': 2100,
+    'Over 90': 3123,
+  },
+  {
+    name: twelvthMonth,
+    '1-30': 2780,
+    '30-60': 3908,
+    '60-90': 2000,
+    'Over 90': 6123,
+  },
 ];
 
 export default class Example extends PureComponent {
@@ -79,8 +128,8 @@ export default class Example extends PureComponent {
 
     return (
       <div>
-       
-        <LineChart
+       <ResponsiveContainer width="99%" height= {300}>
+        <LineChart 
           width={1300}
           height={280}
           data={data}
@@ -96,11 +145,12 @@ export default class Example extends PureComponent {
           <YAxis />
           <Tooltip />
           <Legend />
-          <Line type="monotone" dataKey="1-30" strokeOpacity={opacity['1-30']} stroke="#000080" activeDot={{ r: 8 }} />
-          <Line type="monotone" dataKey="30-60" strokeOpacity={opacity['30-60']} stroke="#FF8C00" />
-          <Line type="monotone" dataKey="60-90" strokeOpacity={opacity['60-90']} stroke="#DC143C" />
-          <Line type="monotone" dataKey="Over 90" strokeOpacity={opacity['Over 90']} stroke="#228B22" />
+          <Line type="monotone" dataKey="1-30" strokeOpacity={opacity['1-30']} stroke="#000080" activeDot={{ r: 10 }} />
+          <Line type="monotone" dataKey="30-60" strokeOpacity={opacity['30-60']} stroke="#FF8C00" activeDot={{ r: 10 }}/>
+          <Line type="monotone" dataKey="60-90" strokeOpacity={opacity['60-90']} stroke="#DC143C" activeDot={{ r: 10 }}/>
+          <Line type="monotone" dataKey="Over 90" strokeOpacity={opacity['Over 90']} stroke="#228B22" activeDot={{ r: 10 }}/>
         </LineChart>
+        </ResponsiveContainer>
        
       </div>
     );
