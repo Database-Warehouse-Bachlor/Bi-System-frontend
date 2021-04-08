@@ -5,9 +5,9 @@ import PieChart from "../Components/PieChart";
 import { Paper } from "@material-ui/core";
 function Dashboard() {
     return (      <Grid row={true}>
-    <Grid column={true} sm={12} md={4} justify={"flex-end"}alignItems={"stretch"}   >
+    <Grid column={true} sm={12} md={12} justify={"flex-end"}alignItems={"stretch"}   >
       <Paper>
-        <BarChart/>
+        <LineBarChart/>
       </Paper>
     </Grid>
     <Grid  alignItems={"stretch"} column={true} sm={12} md={4}>
@@ -17,13 +17,13 @@ function Dashboard() {
     </Grid>
     <Grid column={true} sm={12} md={4} alignItems={"center"} >
       <Paper>
-      <LineBarChart/>
+      <BarChart/>
       </Paper>
     </Grid>
    
       <Grid column={true} sm={12} md={4}alignItems={"stretch"} >
         <Paper>
-        <LineBarChart/>
+        <BarChart/>
         </Paper>
       </Grid>
       <Grid column={true} sm={12} md={4}>
