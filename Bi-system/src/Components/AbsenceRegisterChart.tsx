@@ -1,3 +1,4 @@
+import axios from 'axios';
 import React, { PureComponent, useState, useEffect } from 'react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
 
@@ -16,22 +17,34 @@ var tenthMonth = currentMonth[month.getMonth()+10];
 var eleventhMonth = currentMonth[month.getMonth()+11];  
 var twelvthMonth = currentMonth[month.getMonth()+12];  
 
+const Abcense = () => {
+  const [chartData, setChartData] = useState({});
+  const [yeayr, setYear] = useState([]);
+  const [monthName, setMonthName] = useState([]);
+  const [absenceCount, setAbsenceCount] = useState([]);
 
-    const [dataFetch, setData] = useState([]);
-    useEffect(() => {
-      fetchData();
-    }, [])
-    const fetchData = () => {
-      fetch(`api.mocki.io/v1/262c6789`)
-        .then(response => response.json())
-        .then(json => setData(json))
-    }
-
+  const chart = () => {
+    const empYear: number[] = [];
+    const empMonth: string[] = [];
+    const empAbcenseCount: string[] = [];
+    axios
+      .get("api.mocki.io/v1/262c6789")
+      .then(res => {
+        console.log(res);
+        for (const dataObj of res.data.data) {
+          empYear.push(parseInt(dataObj.employee_salary));
+          empMonth.push(dataObj.employee_age);
+          empAbcenseCount.push(dataObj.employee_age);
+        }
+      })
+      .catch(err => {
+        console.log(err);
+      });
+    console.log(empAbcenseCount, empMonth, empYear);
+  };
+    
     
 
-    
-
-console.log(dataFetch)
 const data = [
   {
     name: crrentMonth,
@@ -107,32 +120,32 @@ const data = [
   },
 ];
 
-export default class Example extends PureComponent {
 
-  render() {
-    console.log(dataFetch)
-    return (
-      <BarChart
-        width={390}
-        height={480}
-        data={data}
-        margin={{
-          top: 5,
-          right: 30,
-          left: 20,
-          bottom: 5,
-        }}
-      >
-        <CartesianGrid strokeDasharray="3 3" />
-        <XAxis dataKey="name" />
-        <YAxis />
-        <Tooltip />
-        <Legend />
-        <Bar dataKey="In" fill="#8884d8" />
-        <Bar dataKey="Out" fill="#82ca9d" />
-      </BarChart>
-    );
-  }
+
+useEffect(() => {
+  chart();
+}, []);
+    <BarChart
+    width={390}
+    height={480}
+    data={data}
+    margin={{
+      top: 5,
+      right: 30,
+      left: 20,
+      bottom: 5,
+    }}
+  >
+    <CartesianGrid strokeDasharray="3 3" />
+    <XAxis dataKey="name" />
+    <YAxis />
+    <Tooltip />
+    <Legend />
+    <Bar dataKey="In" fill="#8884d8" />
+    <Bar dataKey="Out" fill="#82ca9d" />
+  </BarChart>
+   
+    
 }
 
-export {}
+export default Abcense;

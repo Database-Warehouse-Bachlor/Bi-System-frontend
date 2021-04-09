@@ -4,7 +4,7 @@ import LineBarChart from "../Components/LineBarChart";
 import PieChart from "../Components/PieChart";
 import { Paper } from "@material-ui/core";
 import React from "react";
-import AbcenseRegisterChart from "../Components/AbcenseRegisterChart";
+import Test from "../Components/Testing";
 function Dashboard() {
     return (      <Grid row={true}>
     <Grid column={true} sm={12} md={12} justify={"flex-end"}alignItems={"stretch"}   >
@@ -19,10 +19,10 @@ function Dashboard() {
     </Grid>
     <Grid column={true} sm={12} md={4} alignItems={"center"} >
       <Paper>
-      <AbcenseRegisterChart/>
+      <Test/>
       </Paper>
     </Grid>
-   
+      
       <Grid column={true} sm={12} md={4}alignItems={"stretch"} >
         <Paper>
         <BarChart/>
