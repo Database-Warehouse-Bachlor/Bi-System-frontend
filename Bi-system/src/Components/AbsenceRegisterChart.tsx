@@ -24,18 +24,27 @@ const Abcense = () => {
   const [absenceCount, setAbsenceCount] = useState([]);
 
   const chart = () => {
-    const empYear: number[] = [];
-    const empMonth: string[] = [];
-    const empAbcenseCount: string[] = [];
+    const Year: number[] = [];
+    const Month: string[] = [];
+    const AbcenseCount: string[] = [];
     axios
       .get("api.mocki.io/v1/262c6789")
       .then(res => {
         console.log(res);
         for (const dataObj of res.data.data) {
-          empYear.push(parseInt(dataObj.employee_salary));
-          empMonth.push(dataObj.employee_age);
-          empAbcenseCount.push(dataObj.employee_age);
+          Year.push(parseInt(dataObj.year));
+          Month.push(dataObj.mon);
+          AbcenseCount.push(dataObj.employee_age);
         }
+        setChartData({
+          labels: Month,
+          datasets: [
+            label: "absence",
+            data: AbcenseCount,
+            backgroundColor: ["rgba(75, 192, 192, 0.6)"],
+
+          ]
+        })
       })
       .catch(err => {
         console.log(err);

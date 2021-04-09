@@ -38,15 +38,14 @@ const Abcense = () => {
       });
     console.log(empAbcenseCount, empMonth, empYear);
   };
+  
   useEffect(() => {
     chart();
   }, []);
   return (
     <div className="App">
-      <h1>console.log(empAbcenseCount, empMonth, empYear);
-  </h1>
+      <h1></h1>
       <div>
-      
       </div>
     </div>
   );
