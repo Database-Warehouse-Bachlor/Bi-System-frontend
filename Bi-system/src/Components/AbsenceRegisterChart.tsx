@@ -10,6 +10,7 @@ import {
   Legend,
   LineChart,
   Line,
+  ResponsiveContainer,
 } from "recharts";
 
 var currentMonth: string[] = [
@@ -76,6 +77,7 @@ const Abcense = () => {
   }, []);
   
   return (
+    <ResponsiveContainer width="99%" height= {300}>
     <LineChart
       width={1330}
       height={280}
@@ -94,6 +96,7 @@ const Abcense = () => {
       <Legend />
       <Line type= "" dataKey="absenceCount"  fill="#8884d8" stroke="#000080" activeDot={{ r: 10 }} />
     </LineChart>
+    </ResponsiveContainer>
   );
 };
 
