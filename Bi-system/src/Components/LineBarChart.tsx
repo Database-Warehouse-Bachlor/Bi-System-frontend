@@ -145,10 +145,10 @@ export default class Example extends PureComponent {
           <YAxis />
           <Tooltip />
           <Legend />
-          <Line type="monotone" dataKey="1-30" strokeOpacity={opacity['1-30']} stroke="#000080" activeDot={{ r: 10 }} />
-          <Line type="monotone" dataKey="30-60" strokeOpacity={opacity['30-60']} stroke="#FF8C00" activeDot={{ r: 10 }}/>
-          <Line type="monotone" dataKey="60-90" strokeOpacity={opacity['60-90']} stroke="#DC143C" activeDot={{ r: 10 }}/>
-          <Line type="monotone" dataKey="Over 90" strokeOpacity={opacity['Over 90']} stroke="#228B22" activeDot={{ r: 10 }}/>
+          <Line dataKey="1-30"  stroke="#000080" activeDot={{ r: 10 }} />
+          <Line dataKey="30-60" stroke="#FF8C00" activeDot={{ r: 10 }}/>
+          <Line dataKey="60-90" stroke="#DC143C" activeDot={{ r: 10 }}/>
+          <Line type= "number" dataKey="Over 90"  stroke="#228B22" activeDot={{ r: 10 }}/>
         </LineChart>
         </ResponsiveContainer>
        
