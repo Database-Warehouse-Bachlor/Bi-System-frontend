@@ -16,11 +16,10 @@ var eleventhMonth = currentMonth[month.getMonth()+11];
 var twelvthMonth = currentMonth[month.getMonth()+12];  
 
 const renderCustomizedLabel = ({
- 
 }) => {
   return (
-    <text x={1} y={1} fill="black" textAnchor="end" dominantBaseline="central">
-      {"Accounts receivable"}
+    <text x={100} y={85} fill="black" textAnchor="end" dominantBaseline="central">
+      {"Acounts receivable"}
     </text>
   );
 };
@@ -112,6 +111,7 @@ const data = [
   },
 ];
 
+
 export default class Example extends PureComponent {
   state = {
     opacity: {
@@ -145,7 +145,7 @@ export default class Example extends PureComponent {
           <YAxis />
           <Tooltip />
           <Legend />
-          <Line dataKey="1-30"  stroke="#000080" activeDot={{ r: 10 }} />
+          <Line dataKey="1-30"  stroke="#000080" activeDot={{ r: 10 }}  />
           <Line dataKey="30-60" stroke="#FF8C00" activeDot={{ r: 10 }}/>
           <Line dataKey="60-90" stroke="#DC143C" activeDot={{ r: 10 }}/>
           <Line dataKey="Over 90"  stroke="#228B22" activeDot={{ r: 10 }}/>

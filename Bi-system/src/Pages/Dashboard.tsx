@@ -9,37 +9,86 @@ import Abcense from "../Components/AbsenceRegisterChart";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { RouteComponentProps } from "react-router-dom";
 
-
 function Dashboard() {
-  const [value,setValue]=useState('');
-  const handleSelect=(e: any)=>{
+  const [value, setValue] = useState("");
+  const [value2, setValue2] = useState("");
+  const handleSelect = (e: any) => {
     console.log(e);
-    setValue(e)
-  }
-    function test(){
-      return <div><Abcense/></div>;
+    setValue(e);
+  };
+  const handleSelect2 = (e: any) => {
+    console.log(e);
+    setValue2(e);
+  };
+
+  function switchCaseAccountsReceivable() {
+    switch (value) {
+      case "Weekly":
+        console.log(value);
+        return (
+          <div>
+            <Abcense />
+          </div>
+        );
+
+      case "Monthly":
+        console.log(value);
+        return (
+          <div>
+            <LineBarChart />
+          </div>
+        );
+
+      case "Yearly":
+        console.log(value);
+        return (
+          <div>
+            <PieChart />
+          </div>
+        );
+
+      default:
+        return (
+          <div>
+            <LineBarChart />
+          </div>
+        );
     }
-    
-    function switchCase() {
-
-    switch (value) { 
-      case "Weekly":  
-      console.log(value)
-      return <div><Abcense/></div>;
-
-      case "Monthly": 
-      console.log(value)
-      return <div><LineBarChart/></div>;
-      
-      case "Yearly":  
-      console.log(value)
-      return <div><PieChart/></div>;
-      default: return <div><Abcense/></div>;
-
-
-    } 
   }
+  function switchCaseAbsence() {
+    switch (value2) {
+      case "Weekly":
+        console.log(value2);
+        return (
+          <div>
+            <Abcense />
+          </div>
+        );
 
+      case "Monthly":
+        console.log(value2);
+        return (
+          <div>
+            <LineBarChart />
+          </div>
+        );
+
+      case "Yearly":
+        console.log(value2);
+        return (
+          <div>
+            <PieChart />
+          </div>
+        );
+
+      default:
+        return (
+          <div>
+            <LineBarChart />
+          </div>
+        );
+    }
+  }
 
   return (
     <Grid row={true}>
@@ -50,35 +99,33 @@ function Dashboard() {
         justify={"flex-end"}
         alignItems={"stretch"}
       >
-        <DropdownButton     
+        <DropdownButton
           alignRight
           title="Select range"
           id="LineBarDrop"
           onSelect={handleSelect}
-            >
-              <Dropdown.Item eventKey="Weekly">Weekly</Dropdown.Item>
-              <Dropdown.Item eventKey="Monthly">Monthly</Dropdown.Item>
-              <Dropdown.Item eventKey="Yearly"> Yearly </Dropdown.Item>
-              </DropdownButton>
-        
-        <Paper>
-        {switchCase()}
-        </Paper>
+        >
+          <Dropdown.Item eventKey="Weekly">Weekly</Dropdown.Item>
+          <Dropdown.Item eventKey="Monthly">Monthly</Dropdown.Item>
+          <Dropdown.Item eventKey="Yearly"> Yearly </Dropdown.Item>
+        </DropdownButton>
+
+        <Paper>{switchCaseAccountsReceivable()}</Paper>
       </Grid>
       <Grid column={true} sm={12} md={12} alignItems={"center"}>
-      <DropdownButton      alignRight
-          title="Dropdown right"
+        <DropdownButton
+          alignRight
+          title="Select range"
           id="absenceRegisterDrop"
-          onSelect={handleSelect}>
-          <Dropdown.Item href="#/action-1">Weekly</Dropdown.Item>
-          <Dropdown.Item href="#/action-2">Monthly</Dropdown.Item>
-          <Dropdown.Item href="#/action-3" active>
+          onSelect={handleSelect2}
+        >
+          <Dropdown.Item eventKey="Weekly">Weekly</Dropdown.Item>
+          <Dropdown.Item eventKey="Monthly">Monthly</Dropdown.Item>
+          <Dropdown.Item eventKey="Yearly" active>
             Yearly
           </Dropdown.Item>
         </DropdownButton>
-        <Paper>
-          <Abcense />
-        </Paper>
+        <Paper>{switchCaseAbsence()}</Paper>
       </Grid>
       <Grid alignItems={"stretch"} column={true} sm={12} md={4}>
         <Paper>
@@ -106,4 +153,3 @@ function Dashboard() {
 }
 
 export default Dashboard;
-  

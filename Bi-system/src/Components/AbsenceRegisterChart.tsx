@@ -14,7 +14,14 @@ import {
 } from "recharts";
 
 
-
+const renderCustomizedLabel = ({
+}) => {
+  return (
+    <text x={100} y={35} fill="black" textAnchor="end" dominantBaseline="central">
+      {"name"}
+    </text>
+  );
+};
 
 const Abcense = () => {
   const [chartData, setChartData] = useState();
@@ -27,7 +34,15 @@ const Abcense = () => {
     axios
       .get("262c6789")
       .then((res) => {
+
         setChartData(res.data.Absence);
+
+        for (const dataObj of res.data.Absence) 
+        {
+          year.push(parseInt(dataObj.fromDate.Year))
+          month.push((dataObj.fromDate.Month))
+          absenceCount.push((dataObj.duration))
+        }
         console.log(chartData);
       })
       .catch((err) => {
@@ -44,6 +59,7 @@ const Abcense = () => {
     <LineChart
       width={1330}
       height={280}
+    
       data={chartData}
       margin={{
         top: 5,
