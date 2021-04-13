@@ -13,45 +13,8 @@ import {
   ResponsiveContainer,
 } from "recharts";
 
-var currentMonth: string[] = [
-  "Januar",
-  "Februar",
-  "Mars",
-  "April",
-  "Mai",
-  "Juni",
-  "Juli",
-  "August",
-  "September",
-  "Oktober",
-  "November",
-  "Desember",
-  "Januar",
-  "Februar",
-  "Mars",
-  "April",
-  "Mai",
-  "Juni",
-  "Juli",
-  "August",
-  "September",
-  "Oktober",
-  "November",
-  "Desember",
-];
-var month = new Date();
-var crrentMonth = currentMonth[month.getMonth() + 1];
-var secoundMonth = currentMonth[month.getMonth() + 2];
-var thirdMonth = currentMonth[month.getMonth() + 3];
-var forthMonth = currentMonth[month.getMonth() + 4];
-var fifthMonth = currentMonth[month.getMonth() + 5];
-var sixthMonth = currentMonth[month.getMonth() + 6];
-var seventhMonth = currentMonth[month.getMonth() + 7];
-var eigthMonth = currentMonth[month.getMonth() + 8];
-var ninethMonth = currentMonth[month.getMonth() + 9];
-var tenthMonth = currentMonth[month.getMonth() + 10];
-var eleventhMonth = currentMonth[month.getMonth() + 11];
-var twelvthMonth = currentMonth[month.getMonth() + 12];
+
+
 
 const Abcense = () => {
   const [chartData, setChartData] = useState();

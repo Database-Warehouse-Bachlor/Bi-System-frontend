@@ -3,12 +3,44 @@ import BarChart from "../Components/BarChart";
 import LineBarChart from "../Components/LineBarChart";
 import PieChart from "../Components/PieChart";
 import { Paper } from "@material-ui/core";
-import React from "react";
+import React, { useState } from "react";
 import { DropdownButton, Dropdown } from "react-bootstrap";
-import absence from "../Components/AbsenceRegisterChart";
 import Abcense from "../Components/AbsenceRegisterChart";
 import "bootstrap/dist/css/bootstrap.min.css";
+import { RouteComponentProps } from "react-router-dom";
+
+
 function Dashboard() {
+  const [value,setValue]=useState('');
+  const handleSelect=(e: any)=>{
+    console.log(e);
+    setValue(e)
+  }
+    function test(){
+      return <div><Abcense/></div>;
+    }
+    
+    function switchCase() {
+
+    switch (value) { 
+      case "Weekly":  
+      console.log(value)
+      return <div><Abcense/></div>;
+
+      case "Monthly": 
+      console.log(value)
+      return <div><LineBarChart/></div>;
+      
+      case "Yearly":  
+      console.log(value)
+      return <div><PieChart/></div>;
+      default: return <div><Abcense/></div>;
+
+
+    } 
+  }
+
+
   return (
     <Grid row={true}>
       <Grid
@@ -18,20 +50,26 @@ function Dashboard() {
         justify={"flex-end"}
         alignItems={"stretch"}
       >
-        <DropdownButton id="dropdown-basic-button" title="Change view">
-          <Dropdown.Item href="#/action-1">Weekly</Dropdown.Item>
-          <Dropdown.Item href="#/action-2">Monthly</Dropdown.Item>
-          <Dropdown.Item href="#/action-3" active>
-            Yearly
-          </Dropdown.Item>
-        </DropdownButton>
-
+        <DropdownButton     
+          alignRight
+          title="Select range"
+          id="LineBarDrop"
+          onSelect={handleSelect}
+            >
+              <Dropdown.Item eventKey="Weekly">Weekly</Dropdown.Item>
+              <Dropdown.Item eventKey="Monthly">Monthly</Dropdown.Item>
+              <Dropdown.Item eventKey="Yearly"> Yearly </Dropdown.Item>
+              </DropdownButton>
+        
         <Paper>
-          <LineBarChart />
+        {switchCase()}
         </Paper>
       </Grid>
       <Grid column={true} sm={12} md={12} alignItems={"center"}>
-      <DropdownButton id="dropdown-basic-button" title="Change view">
+      <DropdownButton      alignRight
+          title="Dropdown right"
+          id="absenceRegisterDrop"
+          onSelect={handleSelect}>
           <Dropdown.Item href="#/action-1">Weekly</Dropdown.Item>
           <Dropdown.Item href="#/action-2">Monthly</Dropdown.Item>
           <Dropdown.Item href="#/action-3" active>
@@ -68,3 +106,4 @@ function Dashboard() {
 }
 
 export default Dashboard;
+  
