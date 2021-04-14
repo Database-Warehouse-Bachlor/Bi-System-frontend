@@ -31,6 +31,10 @@ function Dashboard() {
     blackPaper: {
       backgroundColor: grey[50],
     },
+    label: {
+      display: "grid",
+      gridAutoFlow: "column",
+    },
   }));
 
   function switchCaseAccountsReceivable() {
@@ -62,7 +66,7 @@ function Dashboard() {
       default:
         return (
           <div>
-            <Abcense />
+            <LineBarChart />
           </div>
         );
     }
@@ -81,7 +85,7 @@ function Dashboard() {
         console.log(value2);
         return (
           <div>
-            <AbcenseMontly/>
+            <AbcenseMontly />
           </div>
         );
 
@@ -112,32 +116,43 @@ function Dashboard() {
         alignItems={"stretch"}
       >
         <Paper className={classes.blackPaper} elevation={10}>
-          <DropdownButton
-            alignRight
-            title={value || "Yearly"}
-            id="LineBarDrop"
-            onSelect={handleSelect}
-          >
-            <Dropdown.Item eventKey="Weekly">Weekly</Dropdown.Item>
-            <Dropdown.Item eventKey="Monthly">Monthly</Dropdown.Item>
-            <Dropdown.Item eventKey="Yearly" > Yearly </Dropdown.Item>
-          </DropdownButton>
+          <div className={classes.label}>
+            
+
+            <DropdownButton
+              alignRight
+              title={value || "Yearly"}
+              id="LineBarDrop"
+              onSelect={handleSelect}
+            >
+              <Dropdown.Item eventKey="Weekly">Weekly</Dropdown.Item>
+              <Dropdown.Item eventKey="Monthly">Monthly</Dropdown.Item>
+              <Dropdown.Item eventKey="Yearly"> Yearly </Dropdown.Item>
+            </DropdownButton>
+
+            <h3>Accounts receivable</h3>
+
+          </div>
+
           {switchCaseAccountsReceivable()}
         </Paper>
       </Grid>
       <Grid column={true} sm={12} md={12} alignItems={"center"}>
         <Paper className={classes.blackPaper} elevation={10}>
-          
+        <div className={classes.label}>
+
           <DropdownButton
             alignRight
             title={value2 || "Yearly"}
             id="absenceRegisterDrop"
             onSelect={handleSelect2}
           >
-            <Dropdown.Item eventKey="Weekly" >Weekly</Dropdown.Item>
-            <Dropdown.Item eventKey="Monthly" >Monthly</Dropdown.Item>
-            <Dropdown.Item eventKey="Yearly" > Yearly </Dropdown.Item>
+            <Dropdown.Item eventKey="Weekly">Weekly</Dropdown.Item>
+            <Dropdown.Item eventKey="Monthly">Monthly</Dropdown.Item>
+            <Dropdown.Item eventKey="Yearly"> Yearly </Dropdown.Item>
           </DropdownButton>
+          <h3>Absence data</h3>
+          </div>
           {switchCaseAbsence()}
         </Paper>
       </Grid>
@@ -165,7 +180,5 @@ function Dashboard() {
     </Grid>
   );
 }
-
-
 
 export default Dashboard;
