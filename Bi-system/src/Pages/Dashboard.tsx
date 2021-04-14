@@ -2,12 +2,13 @@ import Grid from "../Components/Grid";
 import BarChart from "../Components/BarChart";
 import LineBarChart from "../Components/LineBarChart";
 import PieChart from "../Components/PieChart";
-import { Paper } from "@material-ui/core";
+import { makeStyles, Paper } from "@material-ui/core";
 import React, { useState } from "react";
 import { DropdownButton, Dropdown } from "react-bootstrap";
 import Abcense from "../Components/AbsenceRegisterChart";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { RouteComponentProps } from "react-router-dom";
+import grey from "@material-ui/core/colors/grey";
 
 function Dashboard() {
   const [value, setValue] = useState("");
@@ -20,6 +21,14 @@ function Dashboard() {
     console.log(e);
     setValue2(e);
   };
+  const useStyles = makeStyles((theme) => ({
+
+  blackPaper: {
+    backgroundColor: grey[50],
+  }
+
+  }
+));
 
   function switchCaseAccountsReceivable() {
     switch (value) {
@@ -89,7 +98,7 @@ function Dashboard() {
         );
     }
   }
-
+  const classes = useStyles();
   return (
     <Grid row={true}>
       <Grid
@@ -99,6 +108,9 @@ function Dashboard() {
         justify={"flex-end"}
         alignItems={"stretch"}
       >
+        
+
+        <Paper className={classes.blackPaper}> 
         <DropdownButton
           alignRight
           title="Select range"
@@ -109,10 +121,12 @@ function Dashboard() {
           <Dropdown.Item eventKey="Monthly">Monthly</Dropdown.Item>
           <Dropdown.Item eventKey="Yearly"> Yearly </Dropdown.Item>
         </DropdownButton>
-
-        <Paper>{switchCaseAccountsReceivable()}</Paper>
+        {switchCaseAccountsReceivable()}
+        </Paper>
       </Grid>
       <Grid column={true} sm={12} md={12} alignItems={"center"}>
+       
+        <Paper>
         <DropdownButton
           alignRight
           title="Select range"
@@ -125,7 +139,9 @@ function Dashboard() {
             Yearly
           </Dropdown.Item>
         </DropdownButton>
-        <Paper>{switchCaseAbsence()}</Paper>
+          {switchCaseAbsence()}
+        
+        </Paper>
       </Grid>
       <Grid alignItems={"stretch"} column={true} sm={12} md={4}>
         <Paper>
@@ -134,7 +150,7 @@ function Dashboard() {
       </Grid>
 
       <Grid column={true} sm={12} md={4} alignItems={"stretch"}>
-        <Paper>
+        <Paper >
           <BarChart />
         </Paper>
       </Grid>
