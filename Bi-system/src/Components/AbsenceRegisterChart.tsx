@@ -32,17 +32,13 @@ const Abcense = () => {
     let absenceCount: string[] = [];
 
     axios
-      .get("262c6789")
+      .get("61935cbd-3c88-4d5e-b539-69885144b16c")
       .then((res) => {
+
+        console.log(res.data.Absence);
 
         setChartData(res.data.Absence);
 
-        for (const dataObj of res.data.Absence) 
-        {
-          year.push(parseInt(dataObj.fromDate.Year))
-          month.push((dataObj.fromDate.Month))
-          absenceCount.push((dataObj.duration))
-        }
         console.log(chartData);
       })
       .catch((err) => {
@@ -70,10 +66,10 @@ const Abcense = () => {
     >
       <CartesianGrid strokeDasharray="3 3" />
       <XAxis dataKey="monthName" />
-      <YAxis dataKey="absenceCount" />
+      <YAxis dataKey="duration" />
       <Tooltip />
       <Legend />
-      <Line type= "" dataKey="absenceCount"  fill="#8884d8" stroke="#000080" activeDot={{ r: 10 }} />
+      <Line dataKey="duration"  fill="#8884d8" stroke="#000080" activeDot={{ r: 10 }} />
     </LineChart>
     </ResponsiveContainer>
   );
