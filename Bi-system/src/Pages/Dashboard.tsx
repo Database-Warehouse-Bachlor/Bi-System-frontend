@@ -6,6 +6,8 @@ import { makeStyles, Paper } from "@material-ui/core";
 import React, { useState } from "react";
 import { DropdownButton, Dropdown } from "react-bootstrap";
 import Abcense from "../Components/AbsenceRegisterChart";
+import AbcenseWeekly from "../Components/AbsenceRegisterWeeklyChart";
+import AbcenseMontly from "../Components/AbsenceRegisterMonthlyChart";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { RouteComponentProps } from "react-router-dom";
 import grey from "@material-ui/core/colors/grey";
@@ -22,13 +24,10 @@ function Dashboard() {
     setValue2(e);
   };
   const useStyles = makeStyles((theme) => ({
-
-  blackPaper: {
-    backgroundColor: grey[50],
-  }
-
-  }
-));
+    blackPaper: {
+      backgroundColor: grey[50],
+    },
+  }));
 
   function switchCaseAccountsReceivable() {
     switch (value) {
@@ -59,7 +58,7 @@ function Dashboard() {
       default:
         return (
           <div>
-            <LineBarChart />
+            <Abcense />
           </div>
         );
     }
@@ -70,7 +69,7 @@ function Dashboard() {
         console.log(value2);
         return (
           <div>
-            <Abcense />
+            <AbcenseWeekly />
           </div>
         );
 
@@ -78,7 +77,7 @@ function Dashboard() {
         console.log(value2);
         return (
           <div>
-            <LineBarChart />
+            <AbcenseMontly/>
           </div>
         );
 
@@ -86,14 +85,14 @@ function Dashboard() {
         console.log(value2);
         return (
           <div>
-            <PieChart />
+            <Abcense />
           </div>
         );
 
       default:
         return (
           <div>
-            <LineBarChart />
+            <Abcense />
           </div>
         );
     }
@@ -108,39 +107,33 @@ function Dashboard() {
         justify={"flex-end"}
         alignItems={"stretch"}
       >
-        
-
-        <Paper className={classes.blackPaper}> 
-        <DropdownButton
-          alignRight
-          title="Select range"
-          id="LineBarDrop"
-          onSelect={handleSelect}
-        >
-          <Dropdown.Item eventKey="Weekly">Weekly</Dropdown.Item>
-          <Dropdown.Item eventKey="Monthly">Monthly</Dropdown.Item>
-          <Dropdown.Item eventKey="Yearly"> Yearly </Dropdown.Item>
-        </DropdownButton>
-        {switchCaseAccountsReceivable()}
+        <Paper className={classes.blackPaper}>
+          <DropdownButton
+            alignRight
+            title="Select range"
+            id="LineBarDrop"
+            onSelect={handleSelect}
+          >
+            <Dropdown.Item eventKey="Weekly">Weekly</Dropdown.Item>
+            <Dropdown.Item eventKey="Monthly">Monthly</Dropdown.Item>
+            <Dropdown.Item eventKey="Yearly"> Yearly </Dropdown.Item>
+          </DropdownButton>
+          {switchCaseAccountsReceivable()}
         </Paper>
       </Grid>
       <Grid column={true} sm={12} md={12} alignItems={"center"}>
-       
         <Paper>
-        <DropdownButton
-          alignRight
-          title="Select range"
-          id="absenceRegisterDrop"
-          onSelect={handleSelect2}
-        >
-          <Dropdown.Item eventKey="Weekly">Weekly</Dropdown.Item>
-          <Dropdown.Item eventKey="Monthly">Monthly</Dropdown.Item>
-          <Dropdown.Item eventKey="Yearly" active>
-            Yearly
-          </Dropdown.Item>
-        </DropdownButton>
+          <DropdownButton
+            alignRight
+            title="Select range"
+            id="absenceRegisterDrop"
+            onSelect={handleSelect2}
+          >
+            <Dropdown.Item eventKey="Weekly">Weekly</Dropdown.Item>
+            <Dropdown.Item eventKey="Monthly">Monthly</Dropdown.Item>
+            <Dropdown.Item eventKey="Yearly"> Yearly </Dropdown.Item>
+          </DropdownButton>
           {switchCaseAbsence()}
-        
         </Paper>
       </Grid>
       <Grid alignItems={"stretch"} column={true} sm={12} md={4}>
@@ -150,7 +143,7 @@ function Dashboard() {
       </Grid>
 
       <Grid column={true} sm={12} md={4} alignItems={"stretch"}>
-        <Paper >
+        <Paper>
           <BarChart />
         </Paper>
       </Grid>

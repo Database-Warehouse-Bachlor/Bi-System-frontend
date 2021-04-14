@@ -23,7 +23,7 @@ const renderCustomizedLabel = ({
   );
 };
 
-const Abcense = () => {
+const AbcenseMonthly = () => {
   const [chartData, setChartData] = useState();
 
   const chart = () => {
@@ -32,7 +32,7 @@ const Abcense = () => {
     let absenceCount: string[] = [];
 
     axios
-      .get("59ac183a-1a15-4fe2-8dff-93f9a0bae220")
+      .get("2454bc58-6945-4d37-8a8e-e9be7fd1a029")
       .then((res) => {
 
         console.log(res.data.Absence);
@@ -64,14 +64,14 @@ const Abcense = () => {
       }}
     >
       <CartesianGrid strokeDasharray="3 3" />
-      <XAxis dataKey="monthName" />
+      <XAxis dataKey="day"   />
       <YAxis dataKey="duration" />
       <Tooltip />
       <Legend />
-      <Line dataKey="duration"  fill="#000080" stroke="#000080" activeDot={{ r: 10 }} />
+      <Line dataKey="duration"  fill="#8884d8" stroke="#000080" activeDot={{ r: 10 }} />
     </LineChart>
     </ResponsiveContainer>
   );
 };
 
-export default Abcense;
+export default AbcenseMonthly;

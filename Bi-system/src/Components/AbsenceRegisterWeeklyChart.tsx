@@ -32,7 +32,7 @@ const AbcenseWeekly = () => {
     let absenceCount: string[] = [];
 
     axios
-      .get("61935cbd-3c88-4d5e-b539-69885144b16c")
+      .get("fc10a167-d46e-40dc-89c9-e75572e8c508")
       .then((res) => {
 
         console.log(res.data.Absence);
@@ -65,7 +65,7 @@ const AbcenseWeekly = () => {
       }}
     >
       <CartesianGrid strokeDasharray="3 3" />
-      <XAxis dataKey="monthName" />
+      <XAxis dataKey="day" />
       <YAxis dataKey="duration" />
       <Tooltip />
       <Legend />
