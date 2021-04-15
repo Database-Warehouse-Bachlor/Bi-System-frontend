@@ -18,7 +18,14 @@ const data02 = [
   { name: 'Group E', value: 3908 },
   { name: 'Group F', value: 4800 },
 ];
-
+const renderCustomizedLabel = ({
+}) => {
+  return (
+    <text x={100} y={85} fill="black" textAnchor="end" dominantBaseline="central">
+      {"name"}
+    </text>
+  );
+};
 export default class Example extends PureComponent {
 
 
@@ -29,13 +36,15 @@ export default class Example extends PureComponent {
           dataKey="value"
           isAnimationActive={false}
           data={data01}
+          labelLine={false}
+          label={renderCustomizedLabel}
           cx={200}
           cy={150}
           outerRadius={80}
           fill="#8884d8"
-          label
+         
         />
-        <Pie dataKey="value" data={data02} cx={200} cy={150} innerRadius={50} outerRadius={70} fill="#82ca9d" />
+        <Pie  dataKey="value" data={data02} cx={200} cy={150} innerRadius={50} outerRadius={70} fill="#82ca9d" />
         <Tooltip />
       </PieChart>
     );

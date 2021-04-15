@@ -1,6 +1,15 @@
 import React, { PureComponent } from 'react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
 
+
+const renderCustomizedLabel = ({
+}) => {
+  return (
+    <text x={100} y={85} fill="black" textAnchor="end" dominantBaseline="central">
+      {"Acounts receivable"}
+    </text>
+  );
+};
 const data = [
   {
     name: 'Jan',
@@ -66,7 +75,7 @@ export default class Example extends PureComponent {
         <YAxis />
         <Tooltip />
         <Legend />
-        <Bar dataKey="In" fill="#8884d8" />
+        <Bar label={renderCustomizedLabel} dataKey="In" fill="#8884d8" />
         <Bar dataKey="Out" fill="#82ca9d" />
       </BarChart>
     );

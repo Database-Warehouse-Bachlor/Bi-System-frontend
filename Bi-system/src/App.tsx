@@ -5,17 +5,23 @@ import Contact from "./Pages/Contact";
 import Login from "./Pages/Login";
 import Header from "./Header";
 import AddUser from "./Pages/AddUser";
+import grey from "@material-ui/core/colors/brown";
 function App() {
+
+  
   return (
+    <div style={{background: grey[100]}}>
     <Router>
       {<Header />}
       <Switch>
-        <Route path="/" exact component={Login} />
+        <Route path="/" exact component={Dashboard} />
         <Route path="/contact" exact component={Contact} />
-        <Route path="/dashboard" exact component={Dashboard} />
+        <Route path="/dashboard" exact component={Login} />
         <Route path="/AddUser" exact component={AddUser} />
       </Switch>
     </Router>
+    </div>
+
   );
 }
 
