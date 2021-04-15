@@ -1,3 +1,4 @@
+import { useHistory } from 'react-router-dom';
 import { BehaviorSubject } from 'rxjs';
 import { handleResponse } from '../Helpers/HandleResponse';
 
@@ -30,6 +31,8 @@ export const AuthenticationService = {
         localStorage.removeItem('currentUser');
         return true;
       }
+      
+      
 };
 
 
@@ -55,8 +58,15 @@ function login(email: string, pwd: string) {
 
 function logout() {
     // remove user from local storage to log user out
+    
+    function History() {
+      let history = useHistory();
+      return history;
+  }
+    History()
     localStorage.removeItem('currentUser');
     currentUserSubject.next("");
+    History().push("/");
 }
 
 export default AuthenticationService;

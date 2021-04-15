@@ -6,6 +6,7 @@ import Login from "./Pages/Login";
 import Header from "./Header";
 import AddUser from "./Pages/AddUser";
 import grey from "@material-ui/core/colors/brown";
+import Logout from "./Pages/Logout";
 function App() {
 
   
@@ -18,6 +19,7 @@ function App() {
         <Route path="/contact" exact component={Contact} />
         <Route path="/dashboard" exact component={Dashboard} />
         <Route path="/AddUser" exact component={AddUser} />
+        <Route path="/logout" exact component={Logout} />
       </Switch>
     </Router>
     </div>

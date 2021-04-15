@@ -15,6 +15,7 @@ import Menu from "@material-ui/core/Menu";
 import { RouteComponentProps, withRouter } from "react-router-dom";
 import logo from "./logo.png";
 import { Button, useMediaQuery } from "@material-ui/core";
+import Dashboard from "./Pages/Dashboard";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -62,8 +63,15 @@ const Header: React.FC<Props> = ({ history }) => {
   };
 
   const handleMenuClick = (pageURL: string) => {
-    history.push(pageURL);
-    setAnchorEl(null);
+    if (pageURL == "Dashboard" && localStorage.getItem("currentUser") == null) {
+      history.push("/contact");
+      setAnchorEl(null);
+    }
+    else {
+      history.push(pageURL);
+      setAnchorEl(null);
+    }
+    
   };
   /**
    * A list of urls and their titles for the Header, making it easier to add more pages to the website.
@@ -72,8 +80,8 @@ const Header: React.FC<Props> = ({ history }) => {
 
   const pageLinks = [
     {
-      pageTitle: "Login",
-      pageURL: "/",
+      pageTitle: "Dashboard",
+      pageURL: "/Dashboard",
     },
     {
       pageTitle: "Kontakt oss",
@@ -82,6 +90,10 @@ const Header: React.FC<Props> = ({ history }) => {
     {
       pageTitle: "Legg Til Bruker",
       pageURL: "/AddUser",
+    },
+    {
+      pageTitle: "Logg ut",
+      pageURL: "/logout",
     },
   ];
 
