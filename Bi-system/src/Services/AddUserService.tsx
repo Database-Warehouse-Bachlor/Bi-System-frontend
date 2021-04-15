@@ -20,7 +20,7 @@ async function getOrgNr() {
     return response.data;
 }
 
-function register(orgnr: string, email: string, pwd: string) {
+function register(email: string, pwd: string) {
   const requestOptions = {
     method: "POST",
     headers: new Headers({
@@ -28,9 +28,9 @@ function register(orgnr: string, email: string, pwd: string) {
         "bearer " + AuthenticationService.getCurrentUser("currentUser"),
       "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
     }),
-    body: new URLSearchParams({ orgnr, email, pwd }),
+    body: new URLSearchParams({email, pwd }),
   };
 
-  return fetch(`/register`, requestOptions).then(handleResponse);
+  return fetch(`auth/register`, requestOptions).then(handleResponse);
 }
 export default AddUser;

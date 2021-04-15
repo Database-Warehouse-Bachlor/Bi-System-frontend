@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { PureComponent, useState, useEffect } from "react";
+import AuthenticationService from "../Services/AuthenticationService";
 import {
   BarChart,
   Bar,
@@ -13,17 +14,24 @@ import {
   ResponsiveContainer,
 } from "recharts";
 
-
-const renderCustomizedLabel = ({
-}) => {
+const renderCustomizedLabel = ({}) => {
   return (
-    <text x={100} y={35} fill="black" textAnchor="end" dominantBaseline="central">
+    <text
+      x={100}
+      y={35}
+      fill="black"
+      textAnchor="end"
+      dominantBaseline="central"
+    >
       {"name"}
     </text>
   );
 };
 
 const Abcense = () => {
+
+  var monthsName = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG","SEP","OCT","NOV","DEC"];
+
   const [chartData, setChartData] = useState();
 
   const chart = () => {
@@ -32,12 +40,27 @@ const Abcense = () => {
     let absenceCount: string[] = [];
 
     axios
-      .get("59ac183a-1a15-4fe2-8dff-93f9a0bae220")
+      .get("web/absence", {
+        params: { filter: "lastTwelveMonths" },
+        headers: {
+          Authorization:
+            "bearer " + AuthenticationService.getCurrentUser("currentUser"),
+        },
+      })
       .then((res) => {
-
-        console.log(res.data.Absence);
-
-        setChartData(res.data.Absence);
+        var actualData = res.data
+        var ExpectedData = actualData.map((obj: any) => {
+            // Get month number from date-string and then substract 1
+            var monthNum = parseInt(obj.month) - 1;
+            // Get month name from the array and adds years.
+            obj.month = monthsName[monthNum] + " " + obj.year;
+            // Return the object
+            console.log(obj);
+            return obj;
+          });
+        console.log(res.data);
+        
+        setChartData(ExpectedData);
 
         console.log(chartData);
       })
@@ -49,27 +72,32 @@ const Abcense = () => {
   useEffect(() => {
     chart();
   }, []);
-  
+
   return (
-    <ResponsiveContainer width="99%" height= {300}>
-    <LineChart
-      width={1330}
-      height={280}
-      data={chartData}
-      margin={{
-        top: 5,
-        right: 30,
-        left: 20,
-        bottom: 5,
-      }}
-    >
-      <CartesianGrid strokeDasharray="3 3" />
-      <XAxis dataKey="monthName" />
-      <YAxis dataKey="duration" />
-      <Tooltip />
-      <Legend />
-      <Line dataKey="duration"  fill="#000080" stroke="#000080" activeDot={{ r: 10 }} />
-    </LineChart>
+    <ResponsiveContainer width="99%" height={300}>
+      <LineChart
+        width={1330}
+        height={280}
+        data={chartData}
+        margin={{
+          top: 5,
+          right: 30,
+          left: 20,
+          bottom: 5,
+        }}
+      >
+        <CartesianGrid strokeDasharray="3 3" />
+        <XAxis dataKey="month" />
+        <YAxis dataKey="totalDuration" />
+        <Tooltip />
+        <Legend />
+        <Line
+          dataKey="totalDuration"
+          fill="#000080"
+          stroke="#000080"
+          activeDot={{ r: 10 }}
+        />
+      </LineChart>
     </ResponsiveContainer>
   );
 };

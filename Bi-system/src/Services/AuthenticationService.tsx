@@ -41,7 +41,7 @@ function login(email: string, pwd: string) {
         body: new URLSearchParams({ email, pwd })
     };
 
-    return fetch(`/login`, requestOptions)
+    return fetch(`auth/login`, requestOptions)
         .then(handleResponse)
         .then(token => {
             // store user details and jwt token in local storage to keep user logged in between page refreshes
