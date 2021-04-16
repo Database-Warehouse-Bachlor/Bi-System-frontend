@@ -33,7 +33,7 @@ const useStyles = makeStyles({
     color: "#f16705",
   },
   loginCard: {
-    marginTop: 12,
+    marginTop: 100,
   },
 });
 
@@ -100,11 +100,7 @@ export const Login: React.FC<Props> = ({ history }) => {
                 </ErrorMessage>
                 <div className={classes.loginForm}>
                   <Field name="pwd" label="Password" as={TextField} />
-                  <ErrorMessage name="APIKey">
-                    {(message) => (
-                      <Typography color="error">{message}</Typography>
-                    )}
-                  </ErrorMessage>
+                 
                 </div>
                 <Button
                   className={classes.button}

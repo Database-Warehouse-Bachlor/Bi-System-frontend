@@ -12,6 +12,7 @@ import {
   Line,
   ResponsiveContainer,
 } from "recharts";
+import AuthenticationService from "../Services/AuthenticationService";
 
 
 const renderCustomizedLabel = ({
@@ -25,22 +26,49 @@ const renderCustomizedLabel = ({
 
 const AbcenseWeekly = () => {
   const [chartData, setChartData] = useState();
+  
+  var monthsName = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG","SEP","OCT","NOV","DEC"];
 
   const chart = () => {
     let year: number[] = [];
     let month: string[] = [];
     let absenceCount: string[] = [];
 
-    axios
-      .get("fc10a167-d46e-40dc-89c9-e75572e8c508")
-      .then((res) => {
+    var bodyFormData = new FormData();
+    bodyFormData.append('filter', 'thisWeek');
+   
+    axios({
+      method: "get",
+      url: "web/absence",
+      params: {
+        filter: "thisWeek"
+      },
+      headers: {
+        "Content-Type": "multipart/form-data" ,     
+        Authorization:
+          "bearer " + AuthenticationService.getCurrentUser("currentUser"),
+           }
+    })
 
-        console.log(res.data.Absence);
+    .then((res) => {
+      var actualData = res.data
+      console.log(bodyFormData)
+      var ExpectedData = actualData.map((obj: any) => {
 
-        setChartData(res.data.Absence);
+          // Get month number from date-string and then substract 1
+          var monthNum = parseInt(obj.month) - 1;
+          // Get month name from the array and adds years and weekday.
+          obj.month = monthsName[monthNum] + " " + obj.year + " " + obj.weekDay;
+          // Return the object
+          console.log(obj);
+          return obj;
+        });
+      console.log(ExpectedData);
+      
+      setChartData(ExpectedData);
 
-        console.log(chartData);
-      })
+      console.log(chartData);
+    })
       .catch((err) => {
         console.log(err);
       });
@@ -52,7 +80,7 @@ const AbcenseWeekly = () => {
   
   return (
     <ResponsiveContainer width="99%" height= {300}>
-    <LineChart
+    <BarChart
       width={1330}
       height={280}
     
@@ -65,12 +93,12 @@ const AbcenseWeekly = () => {
       }}
     >
       <CartesianGrid strokeDasharray="3 3" />
-      <XAxis dataKey="day" />
-      <YAxis dataKey="duration" />
+      <XAxis dataKey="month" />
+      <YAxis dataKey="totalDuration" />
       <Tooltip />
       <Legend />
-      <Line dataKey="duration"  fill="#8884d8" stroke="#000080" activeDot={{ r: 10 }} />
-    </LineChart>
+      <Bar dataKey="totalDuration"  fill="#000080" stroke="#000080"  />
+    </BarChart>
     </ResponsiveContainer>
   );
 };

@@ -75,7 +75,7 @@ const Abcense = () => {
 
   return (
     <ResponsiveContainer width="99%" height={300}>
-      <LineChart
+      <BarChart
         width={1330}
         height={280}
         data={chartData}
@@ -91,13 +91,13 @@ const Abcense = () => {
         <YAxis dataKey="totalDuration" />
         <Tooltip />
         <Legend />
-        <Line
+        <Bar
           dataKey="totalDuration"
           fill="#000080"
           stroke="#000080"
-          activeDot={{ r: 10 }}
+          
         />
-      </LineChart>
+      </BarChart>
     </ResponsiveContainer>
   );
 };
