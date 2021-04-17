@@ -52,8 +52,8 @@ export const Login: React.FC<Props> = ({ history }) => {
               pwd: "",
             }}
             validationSchema={object({
-              email: string().required().email(),
-              pwd: string().required(),
+              email: string().required('Email må fylles inn').email('Må være en gyldig email'),
+              pwd: string().required('Vennligst skriv inn passord'),
             })}
             onSubmit={async (values) => {
               /** A timer of 3 sec that disables the submit button - Somewhat prevents serverspam */
@@ -93,14 +93,14 @@ export const Login: React.FC<Props> = ({ history }) => {
                     as={TextField}
                   />
                 </div>
-                <ErrorMessage name="Email">
+                <ErrorMessage name="email">
                   {(message) => (
                     <Typography color="error">{message}</Typography>
                   )}
                 </ErrorMessage>
                 <div className={classes.loginForm}>
-                  <Field name="pwd" label="Password" as={TextField} />
-                  <ErrorMessage name="APIKey">
+                  <Field name="pwd" type="Password" label="Password" as={TextField} />
+                  <ErrorMessage name="pwd">
                     {(message) => (
                       <Typography color="error">{message}</Typography>
                     )}
