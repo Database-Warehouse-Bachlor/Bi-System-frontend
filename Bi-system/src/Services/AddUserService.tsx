@@ -1,6 +1,7 @@
 import axios from "axios";
 import { BehaviorSubject } from "rxjs";
 import { handleResponse } from "../Helpers/HandleResponse";
+import React, { PureComponent, useState, useEffect } from "react";
 import AuthenticationService from "./AuthenticationService";
 
 export const AddUser = {
@@ -9,16 +10,19 @@ export const AddUser = {
 };
 
 async function getTennantName() {
-  const response= await axios
-    .get("/auth/tennantName", {
-      headers: {
-        Authorization:
-          "bearer " + AuthenticationService.getCurrentUser("currentUser"),
-      },
-    })
-    console.log(response.data)
-    return response.data;
+ await axios 
+      .get("auth/tennantName", {
+        headers: {
+          Authorization:
+            "bearer " + AuthenticationService.getCurrentUser("currentUser"),
+        },
+      })
+      .then((res) => {
+        return res.data;
+      })
 }
+
+        
 
 
 function register(email: string, pwd: string) {

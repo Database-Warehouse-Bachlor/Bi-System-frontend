@@ -17,11 +17,29 @@ import grey from "@material-ui/core/colors/grey";
 import PropTypes from "prop-types";
 import AuthenticationService from "../Services/AuthenticationService";
 import AddUser from "../Services/AddUserService";
+import { string } from "yup";
+import axios from "axios";
 
 function Dashboard() {
   const [value, setValue] = useState("");
   const [value2, setValue2] = useState("");
   const [active, setActive] = useState<boolean>(false);
+  const [name, setName] = React.useState("");
+
+  axios
+    .get("auth/tennantName", {
+      headers: {
+        Authorization:
+          "bearer " + AuthenticationService.getCurrentUser("currentUser"),
+      },
+    })
+    .then((res) => {
+      console.log(res.data);
+
+      // this will re render the view with new data
+      setName(res.data);
+      console.log(name);
+    });
 
   const handleSelect = (e: any) => {
     console.log(e);
@@ -32,6 +50,7 @@ function Dashboard() {
     setValue2(e);
     setActive(true);
   };
+
   const useStyles = makeStyles((theme) => ({
     blackPaper: {
       backgroundColor: grey[50],
@@ -39,6 +58,9 @@ function Dashboard() {
     label: {
       display: "grid",
       gridAutoFlow: "column",
+    },
+    tennantName: {
+      
     },
   }));
 
@@ -67,7 +89,6 @@ function Dashboard() {
             <PieChart />
           </div>
         );
-        
 
       default:
         return (
@@ -102,20 +123,20 @@ function Dashboard() {
             <Absence />
           </div>
         );
-        case "This Week":
+      case "This Week":
         console.log(value2);
         return (
           <div>
             <AbsenceThisWeek />
           </div>
         );
-        case "This Year":
-          console.log(value2);
-          return (
-            <div>
-              <AbsenceThisYear />
-            </div>
-          );
+      case "This Year":
+        console.log(value2);
+        return (
+          <div>
+            <AbsenceThisYear />
+          </div>
+        );
 
       default:
         return (
@@ -127,83 +148,93 @@ function Dashboard() {
   }
   const classes = useStyles();
   return (
-    <div className="tennantName" >
-      <h1>{AddUser.getTennantName}</h1>
-    <Grid row={true}>
-      <Grid
-        column={true}
-        sm={12}
-        md={12}
-        justify={"flex-end"}
-        alignItems={"stretch"}
-      >
-        <Paper className={classes.blackPaper} elevation={10}>
-          <div className={classes.label}>
-            
+    <div>
+      <Grid row={true}>
+        <Grid
+          column={false}
+          sm={12}
+          md={12}
+          justify={"center"}
+          alignItems={"center"}
+        >
+          <h1 className= {classes.tennantName}>{name}</h1>
+        </Grid>
+        <Grid
+          column={true}
+          sm={12}
+          md={12}
+          justify={"flex-end"}
+          alignItems={"stretch"}
+        >
+          <Paper className={classes.blackPaper} elevation={10}>
+            <div className={classes.label}>
+              <DropdownButton
+                alignRight
+                title={value || "Yearly"}
+                id="LineBarDrop"
+                onSelect={handleSelect}
+              >
+                <Dropdown.Item eventKey="Weekly">Weekly</Dropdown.Item>
+                <Dropdown.Item eventKey="Monthly">Monthly</Dropdown.Item>
+                <Dropdown.Item eventKey="Yearly"> Yearly </Dropdown.Item>
+              </DropdownButton>
 
-            <DropdownButton
-              alignRight
-              title={value || "Yearly"}
-              id="LineBarDrop"
-              onSelect={handleSelect}
-            >
-              <Dropdown.Item eventKey="Weekly">Weekly</Dropdown.Item>
-              <Dropdown.Item eventKey="Monthly">Monthly</Dropdown.Item>
-              <Dropdown.Item eventKey="Yearly"> Yearly </Dropdown.Item>
-            </DropdownButton>
+              <h3>Accounts receivable</h3>
+            </div>
 
-            <h3>Accounts receivable</h3>
+            {switchCaseAccountsReceivable()}
+          </Paper>
+        </Grid>
+        <Grid column={true} sm={12} md={12} alignItems={"center"}>
+          <Paper className={classes.blackPaper} elevation={10}>
+            <div className={classes.label}>
+              <DropdownButton
+                alignRight
+                title={value2 || "Last 12 Months"}
+                id="absenceRegisterDrop"
+                onSelect={handleSelect2}
+              >
+                <Dropdown.Item eventKey="Last 7 Days">
+                  Last 7 Days
+                </Dropdown.Item>
+                <Dropdown.Item eventKey="Last 30 Days">
+                  Last 30 Days
+                </Dropdown.Item>
+                <Dropdown.Item eventKey="Last 12 Months">
+                  {" "}
+                  Last 12 Months{" "}
+                </Dropdown.Item>
+                <Dropdown.Divider />
+                <Dropdown.Item eventKey="This Year"> This Year </Dropdown.Item>
+                <Dropdown.Item eventKey="This Week"> This Week </Dropdown.Item>
+              </DropdownButton>
+              <h3>Absence data</h3>
+            </div>
+            {switchCaseAbsence()}
+          </Paper>
+        </Grid>
+        <Grid alignItems={"stretch"} column={true} sm={12} md={4}>
+          <Paper className={classes.blackPaper} elevation={10}>
+            <PieChart />
+          </Paper>
+        </Grid>
 
-          </div>
-
-          {switchCaseAccountsReceivable()}
-        </Paper>
+        <Grid column={true} sm={12} md={4} alignItems={"stretch"}>
+          <Paper className={classes.blackPaper} elevation={10}>
+            <BarChart />
+          </Paper>
+        </Grid>
+        <Grid column={true} sm={12} md={4}>
+          <Paper className={classes.blackPaper} elevation={10}>
+            <BarChart />
+          </Paper>
+        </Grid>
+        <Grid column={true} sm={12} md={4}>
+          <Paper className={classes.blackPaper} elevation={10}>
+            <PieChart />
+          </Paper>
+        </Grid>
       </Grid>
-      <Grid column={true} sm={12} md={12} alignItems={"center"}>
-        <Paper className={classes.blackPaper} elevation={10}>
-        <div className={classes.label}>
-
-          <DropdownButton
-            alignRight
-            title={value2 || "Last 12 Months"}
-            id="absenceRegisterDrop"
-            onSelect={handleSelect2}
-          >
-            <Dropdown.Item eventKey="Last 7 Days">Last 7 Days</Dropdown.Item>
-            <Dropdown.Item eventKey="Last 30 Days">Last 30 Days</Dropdown.Item>
-            <Dropdown.Item eventKey="Last 12 Months"> Last 12 Months </Dropdown.Item>
-            <Dropdown.Divider />
-            <Dropdown.Item eventKey="This Year"> This Year </Dropdown.Item>
-            <Dropdown.Item eventKey="This Week"> This Week </Dropdown.Item>
-
-          </DropdownButton>
-          <h3>Absence data</h3>
-          </div>
-          {switchCaseAbsence()}
-        </Paper>
-      </Grid>
-      <Grid alignItems={"stretch"} column={true} sm={12} md={4}>
-        <Paper className={classes.blackPaper} elevation={10}>
-          <PieChart />
-        </Paper>
-      </Grid>
-
-      <Grid column={true} sm={12} md={4} alignItems={"stretch"}>
-        <Paper className={classes.blackPaper} elevation={10}>
-          <BarChart />
-        </Paper>
-      </Grid>
-      <Grid column={true} sm={12} md={4}>
-        <Paper className={classes.blackPaper} elevation={10}>
-          <BarChart />
-        </Paper>
-      </Grid>
-      <Grid column={true} sm={12} md={4}>
-        <Paper className={classes.blackPaper} elevation={10}>
-          <PieChart />
-        </Paper>
-      </Grid>
-    </Grid>
     </div>
   );
 }

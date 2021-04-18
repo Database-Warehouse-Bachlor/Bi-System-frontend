@@ -93,8 +93,7 @@ const Abcense = () => {
         <Legend />
         <Bar
           dataKey="totalDuration"
-          fill="#000080"
-          stroke="#000080"
+          fill="#8884d8" stroke="#000080"
           
         />
       </BarChart>
