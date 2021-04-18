@@ -5,13 +5,17 @@ import PieChart from "../Components/PieChart";
 import { makeStyles, Paper } from "@material-ui/core";
 import React, { useState } from "react";
 import { DropdownButton, Dropdown, ButtonToolbar } from "react-bootstrap";
-import Abcense from "../Components/AbsenceRegisterChart";
-import AbcenseWeekly from "../Components/AbsenceRegisterWeeklyChart";
-import AbcenseMontly from "../Components/AbsenceRegisterMonthlyChart";
+import Absence from "../Components/AbsenceRegisters/AbsenceRegisterChart";
+import AbsenceWeekly from "../Components/AbsenceRegisters/AbsenceRegisterWeeklyChart";
+import AbsenceMontly from "../Components/AbsenceRegisters/AbsenceRegisterMonthlyChart";
+import AbsenceThisYear from "../Components/AbsenceRegisters/AbsenceRegisterChartThisYear";
+
 import "bootstrap/dist/css/bootstrap.min.css";
 import { RouteComponentProps } from "react-router-dom";
 import grey from "@material-ui/core/colors/grey";
 import PropTypes from "prop-types";
+import AuthenticationService from "../Services/AuthenticationService";
+import AddUser from "../Services/AddUserService";
 
 function Dashboard() {
   const [value, setValue] = useState("");
@@ -43,7 +47,7 @@ function Dashboard() {
         console.log(value);
         return (
           <div>
-            <Abcense />
+            <Absence />
           </div>
         );
 
@@ -62,6 +66,7 @@ function Dashboard() {
             <PieChart />
           </div>
         );
+        
 
       default:
         return (
@@ -73,40 +78,56 @@ function Dashboard() {
   }
   function switchCaseAbsence() {
     switch (value2) {
-      case "Weekly":
+      case "Last 7 days":
         console.log(value2);
         return (
           <div>
-            <AbcenseWeekly />
+            <AbsenceWeekly />
           </div>
         );
 
-      case "Monthly":
+      case "Last 30 Days":
         console.log(value2);
         return (
           <div>
-            <AbcenseMontly />
+            <AbsenceMontly />
           </div>
         );
 
-      case "Yearly":
+      case "Last 12 Months":
         console.log(value2);
         return (
           <div>
-            <Abcense />
+            <Absence />
           </div>
         );
+        case "this Week":
+        console.log(value2);
+        return (
+          <div>
+            <AbsenceThisYear />
+          </div>
+        );
+        case "this Year":
+          console.log(value2);
+          return (
+            <div>
+              <AbsenceThisYear />
+            </div>
+          );
 
       default:
         return (
           <div>
-            <Abcense />
+            <Absence />
           </div>
         );
     }
   }
   const classes = useStyles();
   return (
+    <div className="tennantName" >
+      <h1>{AddUser.getTennantName}</h1>
     <Grid row={true}>
       <Grid
         column={true}
@@ -143,13 +164,17 @@ function Dashboard() {
 
           <DropdownButton
             alignRight
-            title={value2 || "Yearly"}
+            title={value2 || "Last 12 Months"}
             id="absenceRegisterDrop"
             onSelect={handleSelect2}
           >
-            <Dropdown.Item eventKey="Weekly">Weekly</Dropdown.Item>
-            <Dropdown.Item eventKey="Monthly">Monthly</Dropdown.Item>
-            <Dropdown.Item eventKey="Yearly"> Yearly </Dropdown.Item>
+            <Dropdown.Item eventKey="Last 7 Days">Last 7 Days</Dropdown.Item>
+            <Dropdown.Item eventKey="Last 30 Days">Last 30 Days</Dropdown.Item>
+            <Dropdown.Item eventKey="Last 12 Months"> Last 12 Months </Dropdown.Item>
+            <Dropdown.Divider />
+            <Dropdown.Item eventKey="This Year"> This Year </Dropdown.Item>
+            <Dropdown.Item eventKey="This Week"> This Week </Dropdown.Item>
+
           </DropdownButton>
           <h3>Absence data</h3>
           </div>
@@ -178,6 +203,7 @@ function Dashboard() {
         </Paper>
       </Grid>
     </Grid>
+    </div>
   );
 }
 

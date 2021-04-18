@@ -5,12 +5,12 @@ import AuthenticationService from "./AuthenticationService";
 
 export const AddUser = {
   register,
-  getOrgNr,
+  getTennantName,
 };
 
-async function getOrgNr() {
+async function getTennantName() {
   const response= await axios
-    .get("/getOrgNr", {
+    .get("/auth/tennantName", {
       headers: {
         Authorization:
           "bearer " + AuthenticationService.getCurrentUser("currentUser"),
@@ -19,6 +19,7 @@ async function getOrgNr() {
     console.log(response.data)
     return response.data;
 }
+
 
 function register(email: string, pwd: string) {
   const requestOptions = {

@@ -22,7 +22,7 @@ const renderCustomizedLabel = ({
 }) => {
   return (
     <text x={100} y={85} fill="black" textAnchor="end" dominantBaseline="central">
-      {"name"}
+      {"Name"}
     </text>
   );
 };
@@ -44,7 +44,7 @@ export default class Example extends PureComponent {
           fill="#8884d8"
          
         />
-        <Pie  dataKey="value" data={data02} cx={200} cy={150} innerRadius={50} outerRadius={70} fill="#82ca9d" />
+        <Pie label dataKey="value" data={data02} cx={200} cy={150} innerRadius={50} outerRadius={70} fill="#82ca9d" />
         <Tooltip />
       </PieChart>
     );

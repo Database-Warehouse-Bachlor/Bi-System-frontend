@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { PureComponent, useState, useEffect } from "react";
-import AuthenticationService from "../Services/AuthenticationService";
+import AuthenticationService from "../../Services/AuthenticationService";
 import {
   BarChart,
   Bar,
@@ -41,7 +41,7 @@ const Abcense = () => {
 
     axios
       .get("web/absence", {
-        params: { filter: "lastTwelveMonths" },
+        params: { filter: "thisYear" },
         headers: {
           Authorization:
             "bearer " + AuthenticationService.getCurrentUser("currentUser"),

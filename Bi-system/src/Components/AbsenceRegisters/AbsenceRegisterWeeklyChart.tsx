@@ -12,7 +12,7 @@ import {
   Line,
   ResponsiveContainer,
 } from "recharts";
-import AuthenticationService from "../Services/AuthenticationService";
+import AuthenticationService from "../../Services/AuthenticationService";
 
 
 const renderCustomizedLabel = ({
@@ -34,14 +34,13 @@ const AbcenseWeekly = () => {
     let month: string[] = [];
     let absenceCount: string[] = [];
 
-    var bodyFormData = new FormData();
-    bodyFormData.append('filter', 'thisWeek');
+
    
     axios({
       method: "get",
       url: "web/absence",
       params: {
-        filter: "thisWeek"
+        filter: "lastSevenDays"
       },
       headers: {
         "Content-Type": "multipart/form-data" ,     
@@ -52,13 +51,13 @@ const AbcenseWeekly = () => {
 
     .then((res) => {
       var actualData = res.data
-      console.log(bodyFormData)
+ 
       var ExpectedData = actualData.map((obj: any) => {
 
           // Get month number from date-string and then substract 1
           var monthNum = parseInt(obj.month) - 1;
           // Get month name from the array and adds years and weekday.
-          obj.month = monthsName[monthNum] + " " + obj.year + " " + obj.weekDay;
+          obj.month = monthsName[monthNum] + " " + obj.day + " " + obj.weekDay;
           // Return the object
           console.log(obj);
           return obj;

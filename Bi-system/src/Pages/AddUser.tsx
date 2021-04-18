@@ -70,7 +70,6 @@ export const Login: React.FC<Props> = ({ history }) => {
                   
                   //API call & checks
                   AddUserService.register(
-                    
                     values.email,
                     values.pwd
                   )

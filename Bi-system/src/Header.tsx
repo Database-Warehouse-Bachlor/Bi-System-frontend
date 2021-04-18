@@ -64,7 +64,7 @@ const Header: React.FC<Props> = ({ history }) => {
 
   const handleMenuClick = (pageURL: string) => {
     if (pageURL == "Dashboard" && localStorage.getItem("currentUser") == null) {
-      history.push("/contact");
+      history.push("/");
       setAnchorEl(null);
     }
     else {
@@ -101,7 +101,7 @@ const Header: React.FC<Props> = ({ history }) => {
     <div className={classes.root}>
       <AppBar position="static" className={classes.header}>
         <Toolbar>
-          <img className={classes.logo} src={logo} alt="logo" />
+          <img className={classes.logo} src={logo} alt="logo" onClick={handleMenu} />
           <Typography className={classes.title}></Typography>
           <div>
             {isMobile ? (
