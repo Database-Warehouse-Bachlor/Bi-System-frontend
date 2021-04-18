@@ -9,6 +9,7 @@ import Absence from "../Components/AbsenceRegisters/AbsenceRegisterChart";
 import AbsenceWeekly from "../Components/AbsenceRegisters/AbsenceRegisterWeeklyChart";
 import AbsenceMontly from "../Components/AbsenceRegisters/AbsenceRegisterMonthlyChart";
 import AbsenceThisYear from "../Components/AbsenceRegisters/AbsenceRegisterChartThisYear";
+import AbsenceThisWeek from "../Components/AbsenceRegisters/AbsenceRegisterChartThisWeek";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import { RouteComponentProps } from "react-router-dom";
@@ -78,7 +79,7 @@ function Dashboard() {
   }
   function switchCaseAbsence() {
     switch (value2) {
-      case "Last 7 days":
+      case "Last 7 Days":
         console.log(value2);
         return (
           <div>
@@ -101,14 +102,14 @@ function Dashboard() {
             <Absence />
           </div>
         );
-        case "this Week":
+        case "This Week":
         console.log(value2);
         return (
           <div>
-            <AbsenceThisYear />
+            <AbsenceThisWeek />
           </div>
         );
-        case "this Year":
+        case "This Year":
           console.log(value2);
           return (
             <div>
