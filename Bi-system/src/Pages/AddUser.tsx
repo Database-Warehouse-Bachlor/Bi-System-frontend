@@ -67,9 +67,9 @@ export const Login: React.FC<Props> = ({ history }) => {
               /** A timer of 3 sec that disables the submit button - Somewhat prevents serverspam */
               return new Promise<void>((res) => {
                 setTimeout(async () => {
+                  
                   //API call & checks
                   AddUserService.register(
-                    await AddUserService.getOrgNr(),
                     values.email,
                     values.pwd
                   )
