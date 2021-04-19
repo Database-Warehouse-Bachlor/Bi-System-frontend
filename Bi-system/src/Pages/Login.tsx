@@ -79,7 +79,7 @@ export const Login: React.FC<Props> = ({ history }) => {
                       }
                     );
                   //console.log("response", Response)
-                  console.log("my values", values);
+                  console.log("email", values.email.toLowerCase().trim() );
 
                   res();
                 }, 300);
