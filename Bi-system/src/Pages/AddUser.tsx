@@ -35,7 +35,7 @@ const useStyles = makeStyles({
     color: "#f16705",
   },
   loginCard: {
-    marginTop: 12,
+    marginTop: 100,
   },
 });
 
