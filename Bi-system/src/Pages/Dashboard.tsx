@@ -164,7 +164,7 @@ function Dashboard() {
           sm={12}
           md={12}
           justify={"flex-end"}
-          alignItems={"stretch"}
+          alignItems={"flex-end"}
         >
           <Paper className={classes.blackPaper} elevation={10}>
             <div className={classes.label}>
@@ -178,7 +178,16 @@ function Dashboard() {
                 <Dropdown.Item eventKey="Monthly">Monthly</Dropdown.Item>
                 <Dropdown.Item eventKey="Yearly"> Yearly </Dropdown.Item>
               </DropdownButton>
-
+              <h3></h3>
+              <h3></h3>
+              <h3></h3>
+              <h3></h3>
+              <h3></h3>
+              <h3></h3>
+              <h3></h3>
+              <h3></h3>
+              <h3></h3>
+              <h3></h3>
               <h3>Accounts receivable</h3>
             </div>
 
@@ -208,6 +217,16 @@ function Dashboard() {
                 <Dropdown.Item eventKey="This Year"> This Year </Dropdown.Item>
                 <Dropdown.Item eventKey="This Week"> This Week </Dropdown.Item>
               </DropdownButton>
+              <h3></h3>
+              <h3></h3>
+              <h3></h3>
+              <h3></h3>
+              <h3></h3>
+              <h3></h3>
+              <h3></h3>
+              <h3></h3>
+              <h3></h3>
+              <h3></h3>
               <h3>Absence data</h3>
             </div>
             {switchCaseAbsence()}

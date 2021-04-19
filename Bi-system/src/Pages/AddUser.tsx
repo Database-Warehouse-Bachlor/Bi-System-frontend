@@ -33,9 +33,17 @@ const useStyles = makeStyles({
   },
   cardTitle: {
     color: "#f16705",
+    fontSize: "70px" 
   },
   loginCard: {
-    marginTop: 12,
+    marginTop: 100,
+    height: "40vh",
+    fontSize: "50%",
+
+  },
+  background: {
+    height : '100vh',
+
   },
 });
 
@@ -49,6 +57,7 @@ interface Props extends RouteComponentProps {}
 export const Login: React.FC<Props> = ({ history }) => {
   const classes = useStyles();
   return (
+    <div className={classes.background}> 
     <Grid container justify="center" className={classes.loginCard}>
       <Card className="LoginCard">
         <CardHeader title="Legg Til Bruker" className={classes.cardTitle} />
@@ -131,6 +140,7 @@ export const Login: React.FC<Props> = ({ history }) => {
         </CardContent>
       </Card>
     </Grid>
+    </div>
   );
 };
 export default Login;
