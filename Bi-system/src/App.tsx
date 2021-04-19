@@ -20,6 +20,7 @@ function App() {
         <PrivateRoute path="/dashboard" component={Dashboard} />
         <Route path="/" exact component={Login} />
         <Route path="/contact" exact component={Contact} />
+        <Route path="/dashboard" exact component={Login} />
         <Route path="/AddUser" exact component={AddUser} />
         <Route path="/logout" exact component={Logout} />
       </Switch>

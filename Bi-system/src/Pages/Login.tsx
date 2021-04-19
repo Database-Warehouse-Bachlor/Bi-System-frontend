@@ -14,6 +14,8 @@ import React from "react";
 import { RouteComponentProps } from "react-router-dom";
 import { object, string } from "yup";
 import AuthenticationService from "../Services/AuthenticationService";
+import grey from "@material-ui/core/colors/brown";
+
 
 const useStyles = makeStyles({
   button: {
@@ -35,7 +37,7 @@ const useStyles = makeStyles({
   loginCard: {
     marginTop: 100,
   },
-});
+ });
 
 interface Props extends RouteComponentProps {}
 
@@ -52,8 +54,8 @@ export const Login: React.FC<Props> = ({ history }) => {
               pwd: "",
             }}
             validationSchema={object({
-              email: string().required().email(),
-              pwd: string().required(),
+              email: string().required('Email må fylles inn').email('Må være en gyldig email'),
+              pwd: string().required('Vennligst skriv inn passord'),
             })}
             onSubmit={async (values) => {
               /** A timer of 3 sec that disables the submit button - Somewhat prevents serverspam */
@@ -73,6 +75,7 @@ export const Login: React.FC<Props> = ({ history }) => {
                       },
                       (error) => {
                         console.log("feil")
+                        alert("Passord eller brukernavn er feil. \nVenligst prøv på nytt");
                       }
                     );
                   //console.log("response", Response)
@@ -93,14 +96,18 @@ export const Login: React.FC<Props> = ({ history }) => {
                     as={TextField}
                   />
                 </div>
-                <ErrorMessage name="Email">
+                <ErrorMessage name="email">
                   {(message) => (
                     <Typography color="error">{message}</Typography>
                   )}
                 </ErrorMessage>
                 <div className={classes.loginForm}>
-                  <Field name="pwd" label="Password" as={TextField} />
-                 
+                  <Field name="pwd" type="Password" label="Password" as={TextField} />
+                  <ErrorMessage name="pwd">
+                    {(message) => (
+                      <Typography color="error">{message}</Typography>
+                    )}
+                  </ErrorMessage>
                 </div>
                 <Button
                   className={classes.button}
