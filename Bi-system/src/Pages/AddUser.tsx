@@ -12,7 +12,7 @@ import {
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import React from "react";
 import { RouteComponentProps } from "react-router-dom";
-import { object, string } from "yup";
+import {ref,  object, string } from "yup";
 import { User } from "../Models/User";
 import AddUserService from "../Services/AddUserService";
 import AuthenticationService from "../Services/AuthenticationService";
@@ -37,9 +37,6 @@ const useStyles = makeStyles({
   },
   loginCard: {
     marginTop: 100,
-    height: "40vh",
-    fontSize: "50%",
-
   },
   background: {
     height : '100vh',
@@ -64,38 +61,44 @@ export const Login: React.FC<Props> = ({ history }) => {
         <CardContent>
           <Formik
             initialValues={{
-              orgnr: "",
               email: "",
               pwd: "",
+              pwd2: "",
             }}
             validationSchema={object({
-              email: string().required().email(),
-              pwd: string().required(),
+              email: string()
+                .required("'Email må fylles inn'")
+                .email("Må være en gyldig email"),
+              pwd: string().required("Vennligst skriv inn passord"),
+              pwd2: string().required("Vennligst gjenta passord").oneOf([ref('pwd'), null], 'Passwords must match'),
             })}
             onSubmit={async (values) => {
               /** A timer of 3 sec that disables the submit button - Somewhat prevents serverspam */
-              return new Promise<void>((res) => {
-                setTimeout(async () => {
-                  
-                  //API call & checks
-                  AddUserService.register(
-                    values.email,
-                    values.pwd
-                  )
-                    .then((response) => {
-                      return response;
-                    })
-                    .then(
-                      (user) => {
-                        <Results />;
-                      },
-                      (error) => {
-                        console.log("feil");
-                      }
-                    );
-                  res();
-                }, 500);
-              });
+              if (values.pwd == values.pwd2) {
+                return new Promise<void>((res) => {
+                  setTimeout(async () => {
+                    //API call & checks
+                    AddUserService.register(
+                      values.email.toLowerCase().trim(),
+                      values.pwd.trim()
+                    )
+                      .then((response) => {
+                        return response;
+                      })
+                      .then(
+                        (user) => {
+                          <Results />;
+                        },
+                        (error) => {
+                          console.log("feil");
+                        }
+                      );
+                    res();
+                  }, 500);
+                });
+              } else {
+                alert("Passord må være like");
+              }
             }}
           >
             {({ values, errors, isSubmitting }) => (
@@ -114,8 +117,26 @@ export const Login: React.FC<Props> = ({ history }) => {
                   )}
                 </ErrorMessage>
                 <div className={classes.loginForm}>
-                  <Field name="pwd" label="Password" as={TextField} />
-                  <ErrorMessage name="APIKey">
+                  <Field
+                    name="pwd"
+                    type="Password"
+                    label="Password"
+                    as={TextField}
+                  />
+                  <ErrorMessage name="pwd">
+                    {(message) => (
+                      <Typography color="error">{message}</Typography>
+                    )}
+                  </ErrorMessage>
+                </div>
+                <div className={classes.loginForm}>
+                  <Field
+                    name="pwd2"
+                    type="Password"
+                    label="Confirm Password"
+                    as={TextField}
+                  />
+                  <ErrorMessage name="pwd2">
                     {(message) => (
                       <Typography color="error">{message}</Typography>
                     )}
