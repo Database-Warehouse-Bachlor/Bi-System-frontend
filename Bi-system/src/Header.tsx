@@ -60,7 +60,11 @@ const Header: React.FC<Props> = ({ history }) => {
 
   const handleMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
-  };
+  }
+
+  function handleLogoClick() {
+    history.push("/");
+  }
 
   const handleMenuClick = (pageURL: string) => {
     if (pageURL == "Dashboard" && localStorage.getItem("currentUser") == null) {
@@ -74,18 +78,16 @@ const Header: React.FC<Props> = ({ history }) => {
     
   };
   /**
-   * A list of urls and their titles for the Header, making it easier to add more pages to the website.
-   * Adding a new element into this list will automatically display it in the header menu or as buttons depending on screensize
+   * A list of urls and their titles for the Header, 
+   * making it easier to add more pages to the website.
+   * Adding a new element into this list will automatically 
+   * display it in the header menu or as buttons depending on screensize
    */
 
   const pageLinks = [
     {
       pageTitle: "Dashboard",
       pageURL: "/Dashboard",
-    },
-    {
-      pageTitle: "Kontakt oss",
-      pageURL: "/contact",
     },
     {
       pageTitle: "Legg Til Bruker",
@@ -101,7 +103,9 @@ const Header: React.FC<Props> = ({ history }) => {
     <div className={classes.root}>
       <AppBar position="static" className={classes.header}>
         <Toolbar>
-          <img className={classes.logo} src={logo} alt="logo" onClick={handleMenu} />
+        <a href = {"/"}>
+          <img className={classes.logo} src={logo} alt="logo" />
+          </a>
           <Typography className={classes.title}></Typography>
           <div>
             {isMobile ? (
