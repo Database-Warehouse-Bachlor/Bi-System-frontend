@@ -62,7 +62,7 @@ export const Login: React.FC<Props> = ({ history }) => {
               return new Promise<void>((res) => {
                 setTimeout(() => {
                   //API call & checks
-                  AuthenticationService.login(values.email, values.pwd)
+                  AuthenticationService.login(values.email.toLowerCase().trim(), values.pwd)
                     .then(response => {
                       //console.log(response.text());
 
