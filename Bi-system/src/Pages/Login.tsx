@@ -14,6 +14,8 @@ import React from "react";
 import { RouteComponentProps } from "react-router-dom";
 import { object, string } from "yup";
 import AuthenticationService from "../Services/AuthenticationService";
+import grey from "@material-ui/core/colors/brown";
+
 
 const useStyles = makeStyles({
   button: {
@@ -35,7 +37,7 @@ const useStyles = makeStyles({
   loginCard: {
     marginTop: 12,
   },
-});
+ });
 
 interface Props extends RouteComponentProps {}
 
@@ -73,6 +75,7 @@ export const Login: React.FC<Props> = ({ history }) => {
                       },
                       (error) => {
                         console.log("feil")
+                        alert("Passord eller brukernavn er feil. \nVenligst prøv på nytt");
                       }
                     );
                   //console.log("response", Response)
