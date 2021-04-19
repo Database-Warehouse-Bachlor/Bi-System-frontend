@@ -103,7 +103,7 @@ const Header: React.FC<Props> = ({ history }) => {
     <div className={classes.root}>
       <AppBar position="static" className={classes.header}>
         <Toolbar>
-        <a href = {"/"}>
+        <a href = {"/Dashboard"}>
           <img className={classes.logo} src={logo} alt="logo" />
           </a>
           <Typography className={classes.title}></Typography>

@@ -22,8 +22,8 @@ function App() {
         <PrivateRoute path="/dashboard" component={Dashboard} />
         <Route path="/" exact component={Login} />
         <Route path="/dashboard" exact component={Login} />
-        <Route path="/AddUser" exact component={AddUser} />
-        <Route path="/logout" exact component={Logout} />
+        <PrivateRoute path="/AddUser" exact component={AddUser} />
+        <PrivateRoute path="/logout" exact component={Logout} />
       </Switch>
     </Router>
    
