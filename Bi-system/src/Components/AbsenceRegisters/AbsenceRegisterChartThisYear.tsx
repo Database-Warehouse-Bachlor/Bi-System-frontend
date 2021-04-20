@@ -30,15 +30,16 @@ const renderCustomizedLabel = ({}) => {
 
 const Abcense = () => {
 
-  var monthsName = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG","SEP","OCT","NOV","DEC"];
+// Sets the names of all the months
+var monthsName = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG","SEP","OCT","NOV","DEC"];
+//Stores the chart data as a state
+const [chartData, setChartData] = useState();
 
-  const [chartData, setChartData] = useState();
+const chart = () => {
+  
 
-  const chart = () => {
-    let year: number[] = [];
-    let month: string[] = [];
-    let absenceCount: string[] = [];
-
+  //Api call to the backend getting the information about Absence the last twelve months.
+  //Authorizes using token stored in local storage.
     axios
       .get("web/absence", {
         params: { filter: "thisYear" },
@@ -74,7 +75,9 @@ const Abcense = () => {
   }, []);
 
   return (
+    //Makes the Chart responsive
     <ResponsiveContainer width="99%" height={300}>
+    {/* Generates a BarChart with the wanted data */}
       <BarChart
         width={1330}
         height={280}

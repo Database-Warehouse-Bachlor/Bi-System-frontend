@@ -14,31 +14,20 @@ import {
   ResponsiveContainer,
 } from "recharts";
 
-const renderCustomizedLabel = ({}) => {
-  return (
-    <text
-      x={100}
-      y={35}
-      fill="black"
-      textAnchor="end"
-      dominantBaseline="central"
-    >
-      {"name"}
-    </text>
-  );
-};
+
 
 const Abcense = () => {
 
+  // Sets the names of all the months
   var monthsName = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG","SEP","OCT","NOV","DEC"];
-
+  //Stores the chart data as a state
   const [chartData, setChartData] = useState();
 
   const chart = () => {
-    let year: number[] = [];
-    let month: string[] = [];
-    let absenceCount: string[] = [];
+    
 
+    //Api call to the backend getting the information about Absence the last twelve months.
+    //Authorizes using token stored in local storage.
     axios
       .get("web/absence", {
         params: { filter: "lastTwelveMonths" },
@@ -48,21 +37,19 @@ const Abcense = () => {
         },
       })
       .then((res) => {
+    //Alters the Json data to fit the chart in a specific way.
         var actualData = res.data
         var ExpectedData = actualData.map((obj: any) => {
             // Get month number from date-string and then substract 1
             var monthNum = parseInt(obj.month) - 1;
             // Get month name from the array and adds years.
             obj.month = monthsName[monthNum] + " " + obj.year;
+            
             // Return the object
-            console.log(obj);
             return obj;
           });
-        console.log(res.data);
-        
+  
         setChartData(ExpectedData);
-
-        console.log(chartData);
       })
       .catch((err) => {
         console.log(err);
@@ -74,7 +61,9 @@ const Abcense = () => {
   }, []);
 
   return (
+    //Makes the Chart responsive
     <ResponsiveContainer width="99%" height={300}>
+    {/* Generates a BarChart with the wanted data */}
       <BarChart
         width={1330}
         height={280}
