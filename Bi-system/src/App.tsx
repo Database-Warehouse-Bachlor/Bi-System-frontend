@@ -11,11 +11,10 @@ import { Helmet } from 'react-helmet'
 require('./App.css')
 function App() {
 
-  
-  return (
-   
-  
-      
+  /* Route service for the web app
+  Private Route redirects back to login if not logged in, cant watch dashboard
+  or add user if not logged in. */
+  return (    
     <Router>
       {<Header />}
       <Switch>

@@ -14,9 +14,8 @@ import React from "react";
 import { RouteComponentProps } from "react-router-dom";
 import { object, string } from "yup";
 import AuthenticationService from "../Services/AuthenticationService";
-import grey from "@material-ui/core/colors/brown";
 
-
+/* Inline CSS used for styling */
 const useStyles = makeStyles({
   button: {
     marginTop: 18,
@@ -38,101 +37,108 @@ const useStyles = makeStyles({
     marginTop: 100,
   },
   background: {
-    height : '100vh',
-
+    height: "100vh",
   },
- });
+});
 
 interface Props extends RouteComponentProps {}
 
 export const Login: React.FC<Props> = ({ history }) => {
   const classes = useStyles();
   return (
-    <div className={classes.background}> 
-    <Grid container justify="center" className={classes.loginCard}>
-      <Card className="LoginCard">
-        <CardHeader title="Login" className={classes.cardTitle} />
-        <CardContent>
-          <Formik
-            initialValues={{
-              email: "",
-              pwd: "",
-            }}
-            validationSchema={object({
-              email: string().required('Email må fylles inn').email('Må være en gyldig email'),
-              pwd: string().required('Vennligst skriv inn passord'),
-            })}
-            onSubmit={async (values) => {
-              /** A timer of 3 sec that disables the submit button - Somewhat prevents serverspam */
-              return new Promise<void>((res) => {
-                setTimeout(() => {
-                  //API call & checks
-                  AuthenticationService.login(values.email.toLowerCase().trim(), values.pwd)
-                    .then(response => {
-                      //console.log(response.text());
-
-                      return response;
-                    })
-                    .then(
-                      (user) => {
-                        console.log("Token: ", AuthenticationService.getCurrentUser("currentUser"))
-                        history.push("/Dashboard");
-                      },
-                      (error) => {
-                        console.log("feil")
-                        alert("Passord eller brukernavn er feil. \nVenligst prøv på nytt");
-                      }
-                    );
-                  //console.log("response", Response)
-                  console.log("email", values.email.toLowerCase().trim() );
-
-                  res();
-                }, 300);
-              });
-            }}
-          >
-            {({ values, errors, isSubmitting }) => (
-              <Form>
-                <div className={classes.loginForm}>
-                  <Field
-                    name="email"
-                    type="Email"
-                    label="Email"
-                    as={TextField}
-                  />
-                </div>
-                <ErrorMessage name="email">
-                  {(message) => (
-                    <Typography color="error">{message}</Typography>
-                  )}
-                </ErrorMessage>
-                <div className={classes.loginForm}>
-                  <Field name="pwd" type="Password" label="Password" as={TextField} />
-                  <ErrorMessage name="pwd">
+    <div className={classes.background}>
+      <Grid container justify="center" className={classes.loginCard}>
+        <Card className="LoginCard">
+          <CardHeader title="Login" className={classes.cardTitle} />
+          <CardContent>
+            <Formik
+              initialValues={{
+                email: "",
+                pwd: "",
+              }}
+              /* Validation regarding the Fields */
+              validationSchema={object({
+                email: string()
+                  .required("Email må fylles inn")
+                  .email("Må være en gyldig email"),
+                pwd: string().required("Vennligst skriv inn passord"),
+              })}
+              onSubmit={async (values) => {
+                /** A timer of 1 sec that disables the submit button - Somewhat prevents serverspam */
+                return new Promise<void>((res) => {
+                  setTimeout(() => {
+                   /*  API call & checks, 
+                   Sends everything lowercase*/
+                    AuthenticationService.login(
+                      values.email.toLowerCase().trim(),
+                      values.pwd
+                    )
+                      .then((response) => {
+                        return response;
+                      })
+                   /* Pushes the user to /Dashboard of login info is correct */
+                      .then(
+                        (user) => {
+                          history.push("/Dashboard");
+                        },
+                        (error) => {  
+                          alert(
+                            "Passord eller brukernavn er feil. \nVenligst prøv på nytt"
+                          );
+                        }
+                      );
+                    res();
+                  }, 1000);
+                });
+              }}
+            >{/* Code for generating the form with fields */}
+              {({ values, errors, isSubmitting }) => (
+                <Form>
+                  <div className={classes.loginForm}>
+                    <Field
+                      name="email"
+                      type="Email"
+                      label="Email"
+                      as={TextField}
+                    />
+                  </div>
+                  <ErrorMessage name="email">
                     {(message) => (
                       <Typography color="error">{message}</Typography>
                     )}
                   </ErrorMessage>
-                </div>
-                <Button
-                  className={classes.button}
-                  type="submit"
-                  variant="contained"
-                  disabled={isSubmitting}
-                  startIcon={
-                    isSubmitting ? (
-                      <CircularProgress size="0.8rem" />
-                    ) : undefined
-                  }
-                >
-                  {isSubmitting ? "Submitting" : "Login"}
-                </Button>
-              </Form>
-            )}
-          </Formik>
-        </CardContent>
-      </Card>
-    </Grid>
+                  <div className={classes.loginForm}>
+                    <Field
+                      name="pwd"
+                      type="Password"
+                      label="Password"
+                      as={TextField}
+                    />
+                    <ErrorMessage name="pwd">
+                      {(message) => (
+                        <Typography color="error">{message}</Typography>
+                      )}
+                    </ErrorMessage>
+                  </div>
+                  <Button
+                    className={classes.button}
+                    type="submit"
+                    variant="contained"
+                    disabled={isSubmitting}
+                    startIcon={
+                      isSubmitting ? (
+                        <CircularProgress size="0.8rem" />
+                      ) : undefined
+                    }
+                  >
+                    {isSubmitting ? "Submitting" : "Login"}
+                  </Button>
+                </Form>
+              )}
+            </Formik>
+          </CardContent>
+        </Card>
+      </Grid>
     </div>
   );
 };

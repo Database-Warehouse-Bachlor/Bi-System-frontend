@@ -12,20 +12,17 @@ import AbsenceThisYear from "../Components/AbsenceRegisters/AbsenceRegisterChart
 import AbsenceThisWeek from "../Components/AbsenceRegisters/AbsenceRegisterChartThisWeek";
 
 import "bootstrap/dist/css/bootstrap.min.css";
-import { RouteComponentProps } from "react-router-dom";
 import grey from "@material-ui/core/colors/grey";
-import PropTypes from "prop-types";
 import AuthenticationService from "../Services/AuthenticationService";
-import AddUser from "../Services/AddUserService";
-import { string } from "yup";
 import axios from "axios";
 
+/* useState hooks for storing values*/
 function Dashboard() {
-  const [value, setValue] = useState("");
-  const [value2, setValue2] = useState("");
-  const [active, setActive] = useState<boolean>(false);
-  const [name, setName] = React.useState("");
+  const [accRes, setAccRes] = useState("");
+  const [absence, setAbsence] = useState("");
+  const [tennantName, setTennantName] = React.useState("");
 
+  /* Api call for setting the name of the logged in tennant */
   axios
     .get("auth/tennantName", {
       headers: {
@@ -34,23 +31,18 @@ function Dashboard() {
       },
     })
     .then((res) => {
-      console.log(res.data);
-
-      // this will re render the view with new data
-      setName(res.data);
-      console.log(name);
+      //Re render the view with new data
+      setTennantName(res.data);
     });
 
-  const handleSelect = (e: any) => {
-    console.log(e);
-    setValue(e);
+  /* Handles the filter value selected */
+  const handleSelectAccRes = (e: any) => {
+    setAccRes(e);
   };
-  const handleSelect2 = (e: any) => {
-    console.log(e);
-    setValue2(e);
-    setActive(true);
+  const handleSelectAbsence = (e: any) => {
+    setAbsence(e);
   };
-
+  /* Inline CSS used for styling */
   const useStyles = makeStyles((theme) => ({
     blackPaper: {
       backgroundColor: grey[50],
@@ -59,15 +51,15 @@ function Dashboard() {
       display: "grid",
       gridAutoFlow: "column",
     },
-    tennantName: {
-      
-    },
+    tennantName: {},
   }));
 
+  /* Switch cases for changing the view when the dropdown filter change happens 
+  Une switchCase for each of the graphs*/
   function switchCaseAccountsReceivable() {
-    switch (value) {
+    switch (accRes) {
       case "Weekly":
-        console.log(value);
+        console.log(accRes);
         return (
           <div>
             <Absence />
@@ -75,7 +67,7 @@ function Dashboard() {
         );
 
       case "Monthly":
-        console.log(value);
+        console.log(accRes);
         return (
           <div>
             <LineBarChart />
@@ -83,7 +75,7 @@ function Dashboard() {
         );
 
       case "Yearly":
-        console.log(value);
+        console.log(accRes);
         return (
           <div>
             <PieChart />
@@ -99,9 +91,9 @@ function Dashboard() {
     }
   }
   function switchCaseAbsence() {
-    switch (value2) {
+    switch (absence) {
       case "Last 7 Days":
-        console.log(value2);
+        console.log(absence);
         return (
           <div>
             <AbsenceWeekly />
@@ -109,7 +101,7 @@ function Dashboard() {
         );
 
       case "Last 30 Days":
-        console.log(value2);
+        console.log(absence);
         return (
           <div>
             <AbsenceMontly />
@@ -117,21 +109,21 @@ function Dashboard() {
         );
 
       case "Last 12 Months":
-        console.log(value2);
+        console.log(absence);
         return (
           <div>
             <Absence />
           </div>
         );
       case "This Week":
-        console.log(value2);
+        console.log(absence);
         return (
           <div>
             <AbsenceThisWeek />
           </div>
         );
       case "This Year":
-        console.log(value2);
+        console.log(absence);
         return (
           <div>
             <AbsenceThisYear />
@@ -149,6 +141,7 @@ function Dashboard() {
   const classes = useStyles();
   return (
     <div>
+      {/* Grid justification */}
       <Grid row={true}>
         <Grid
           column={false}
@@ -157,7 +150,8 @@ function Dashboard() {
           justify={"center"}
           alignItems={"center"}
         >
-          <h1 className= {classes.tennantName}>{name}</h1>
+          {/* sets the tennantname on top of the page */}
+          <h1 className={classes.tennantName}>{tennantName}</h1>
         </Grid>
         <Grid
           column={true}
@@ -170,14 +164,15 @@ function Dashboard() {
             <div className={classes.label}>
               <DropdownButton
                 alignRight
-                title={value || "Yearly"}
+                title={accRes || "Yearly"}
                 id="LineBarDrop"
-                onSelect={handleSelect}
+                onSelect={handleSelectAccRes}
               >
                 <Dropdown.Item eventKey="Weekly">Weekly</Dropdown.Item>
                 <Dropdown.Item eventKey="Monthly">Monthly</Dropdown.Item>
                 <Dropdown.Item eventKey="Yearly"> Yearly </Dropdown.Item>
               </DropdownButton>
+              {/* Adding colums so that the title of the graph is on the right */}
               <h3></h3>
               <h3></h3>
               <h3></h3>
@@ -199,9 +194,9 @@ function Dashboard() {
             <div className={classes.label}>
               <DropdownButton
                 alignRight
-                title={value2 || "Last 12 Months"}
+                title={absence || "Last 12 Months"}
                 id="absenceRegisterDrop"
-                onSelect={handleSelect2}
+                onSelect={handleSelectAbsence}
               >
                 <Dropdown.Item eventKey="Last 7 Days">
                   Last 7 Days
@@ -217,6 +212,7 @@ function Dashboard() {
                 <Dropdown.Item eventKey="This Year"> This Year </Dropdown.Item>
                 <Dropdown.Item eventKey="This Week"> This Week </Dropdown.Item>
               </DropdownButton>
+              {/* Adding colums so that the title of the graph is on the right */}
               <h3></h3>
               <h3></h3>
               <h3></h3>
