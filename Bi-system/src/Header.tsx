@@ -17,6 +17,7 @@ import logo from "./logo.png";
 import { Button, useMediaQuery } from "@material-ui/core";
 import Dashboard from "./Pages/Dashboard";
 
+/* Inline CSS styles for the header */
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     header: {
@@ -60,10 +61,6 @@ const Header: React.FC<Props> = ({ history }) => {
 
   const handleMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
-  }
-
-  function handleLogoClick() {
-    history.push("/");
   }
 
   const handleMenuClick = (pageURL: string) => {
