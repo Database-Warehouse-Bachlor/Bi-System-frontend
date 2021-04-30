@@ -9,7 +9,7 @@ export const AddUser = {
   getTennantName,
 };
 
-/* Returns the loggen in tennant name from the Api*/
+/* Returns the loggend in tennant name from the Api*/
 async function getTennantName() {
  await axios 
       .get("auth/tennantName", {
@@ -25,7 +25,8 @@ async function getTennantName() {
 
         
 
-/* Sends an email and password to the Api to add a new user under the logged in Tennant */
+/* Sends an email and password to the Api to add a new user 
+under the logged in Tennant */
 function register(email: string, pwd: string) {
   const requestOptions = {
     method: "POST",

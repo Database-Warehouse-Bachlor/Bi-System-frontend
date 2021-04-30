@@ -105,7 +105,7 @@ export const Login: React.FC<Props> = () => {
                       as={TextField}
                     />
                   </div>
-                  <ErrorMessage name="Email">
+                  <ErrorMessage name="email">
                     {(message) => (
                       <Typography color="error">{message}</Typography>
                     )}
