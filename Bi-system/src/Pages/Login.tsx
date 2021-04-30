@@ -11,10 +11,18 @@ import {
 } from "@material-ui/core";
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import React from "react";
-import { RouteComponentProps } from "react-router-dom";
+import { RouteComponentProps, useHistory, withRouter } from "react-router-dom";
 import { object, string } from "yup";
 import AuthenticationService from "../Services/AuthenticationService";
 
+
+function Login() {
+
+  let history = useHistory();
+
+  function handleClick() {
+    history.push("/Dashboard");
+  }
 /* Inline CSS used for styling */
 const useStyles = makeStyles({
   button: {
@@ -41,12 +49,11 @@ const useStyles = makeStyles({
   },
 });
 
-interface Props extends RouteComponentProps {}
 
-export const Login: React.FC<Props> = ({ history }) => {
+
   const classes = useStyles();
   return (
-    <div className={classes.background}>
+    <div className={classes.background} data-testid="cardcontainer" >
       <Grid container justify="center" className={classes.loginCard}>
         <Card className="LoginCard">
           <CardHeader title="Login" className={classes.cardTitle} />
@@ -79,7 +86,7 @@ export const Login: React.FC<Props> = ({ history }) => {
                    /* Pushes the user to /Dashboard of login info is correct */
                       .then(
                         (user) => {
-                          history.push("/Dashboard");
+                          handleClick();
                         },
                         (error) => {  
                           alert(
@@ -141,5 +148,5 @@ export const Login: React.FC<Props> = ({ history }) => {
       </Grid>
     </div>
   );
-};
+}
 export default Login;
