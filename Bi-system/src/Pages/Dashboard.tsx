@@ -6,6 +6,9 @@ import { makeStyles, Paper } from "@material-ui/core";
 import React, { useState } from "react";
 import { DropdownButton, Dropdown, ButtonToolbar } from "react-bootstrap";
 import Absence from "../Components/AbsenceRegisters/AbsenceRegisterChart";
+import AccountRecLast12Months from "../Components/AccountReceivableCharts/AccountReceivableChart"
+import AccountRecThisYear from "../Components/AccountReceivableCharts/AccountReceivableThisYearChart"
+import AccountRecLastMonth from "../Components/AccountReceivableCharts/AccountReceivableMonthChart"
 import AbsenceWeekly from "../Components/AbsenceRegisters/AbsenceRegisterWeeklyChart";
 import AbsenceMontly from "../Components/AbsenceRegisters/AbsenceRegisterMonthlyChart";
 import AbsenceThisYear from "../Components/AbsenceRegisters/AbsenceRegisterChartThisYear";
@@ -52,44 +55,48 @@ function Dashboard() {
       gridAutoFlow: "column",
     },
     tennantName: {},
+    background: {
+      height: "100vh",
+    },
   }));
 
   /* Switch cases for changing the view when the dropdown filter change happens 
   Une switchCase for each of the graphs*/
   function switchCaseAccountsReceivable() {
     switch (accRes) {
-      case "Weekly":
+      case "Last 30 Days":
         console.log(accRes);
         return (
           <div>
-            <Absence />
+            <AccountRecLastMonth />
           </div>
         );
 
-      case "Monthly":
+      case "Last 12 Months":
         console.log(accRes);
         return (
           <div>
-            <LineBarChart />
+            <AccountRecLast12Months />
           </div>
         );
 
-      case "Yearly":
+      case "thisYear":
         console.log(accRes);
         return (
           <div>
-            <PieChart />
+            <AccountRecThisYear />
           </div>
         );
 
       default:
         return (
           <div>
-            <LineBarChart />
+            <AccountRecThisYear />
           </div>
         );
     }
   }
+  
   function switchCaseAbsence() {
     switch (absence) {
       case "Last 7 Days":
@@ -140,7 +147,7 @@ function Dashboard() {
   }
   const classes = useStyles();
   return (
-    <div>
+    <div className={classes.background}>
       {/* Grid justification */}
       <Grid row={true}>
         <Grid
@@ -164,13 +171,13 @@ function Dashboard() {
             <div className={classes.label}>
               <DropdownButton
                 alignRight
-                title={accRes || "Yearly"}
+                title={accRes || "This Year"}
                 id="LineBarDrop"
                 onSelect={handleSelectAccRes}
               >
-                <Dropdown.Item eventKey="Weekly">Weekly</Dropdown.Item>
-                <Dropdown.Item eventKey="Monthly">Monthly</Dropdown.Item>
-                <Dropdown.Item eventKey="Yearly"> Yearly </Dropdown.Item>
+                <Dropdown.Item eventKey="Last 30 Days">Last 30 Days</Dropdown.Item>
+                <Dropdown.Item eventKey="Last 12 Months">Last 12 Months</Dropdown.Item>
+                <Dropdown.Item eventKey="This Year"> This Year </Dropdown.Item>
               </DropdownButton>
               {/* Adding colums so that the title of the graph is on the right */}
               <h3></h3>
@@ -226,27 +233,6 @@ function Dashboard() {
               <h3>Absence data</h3>
             </div>
             {switchCaseAbsence()}
-          </Paper>
-        </Grid>
-        <Grid alignItems={"stretch"} column={true} sm={12} md={4}>
-          <Paper className={classes.blackPaper} elevation={10}>
-            <PieChart />
-          </Paper>
-        </Grid>
-
-        <Grid column={true} sm={12} md={4} alignItems={"stretch"}>
-          <Paper className={classes.blackPaper} elevation={10}>
-            <BarChart />
-          </Paper>
-        </Grid>
-        <Grid column={true} sm={12} md={4}>
-          <Paper className={classes.blackPaper} elevation={10}>
-            <BarChart />
-          </Paper>
-        </Grid>
-        <Grid column={true} sm={12} md={4}>
-          <Paper className={classes.blackPaper} elevation={10}>
-            <PieChart />
           </Paper>
         </Grid>
       </Grid>

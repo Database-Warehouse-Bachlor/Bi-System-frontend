@@ -8,7 +8,6 @@ import grey from "@material-ui/core/colors/brown";
 import Logout from "./Pages/Logout";
 import PrivateRoute from "./Components/PrivateRoute";
 import { Helmet } from 'react-helmet'
-require('./App.css')
 function App() {
 
   /* Route service for the web app

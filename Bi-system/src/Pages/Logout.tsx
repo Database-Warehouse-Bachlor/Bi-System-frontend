@@ -4,6 +4,7 @@ import AuthenticationService from "../Services/AuthenticationService";
 This page is never shown */
 const Logout = () => {
     AuthenticationService.logout();
+    window.location.reload(false);
 }
 export default Logout;
 

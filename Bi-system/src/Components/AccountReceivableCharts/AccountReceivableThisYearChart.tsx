@@ -1,3 +1,4 @@
+
 import axios from "axios";
 import React, { PureComponent, useEffect, useState } from "react";
 import {
@@ -10,7 +11,7 @@ import {
   ResponsiveContainer,
   Legend,
 } from "recharts";
-import AuthenticationService from "../Services/AuthenticationService";
+import AuthenticationService from "../../Services/AuthenticationService";
 
 const AccRec = () => {
   // Sets the names of all the months
@@ -35,8 +36,8 @@ const AccRec = () => {
     //Api call to the backend getting the information about Absence the last twelve months.
     //Authorizes using token stored in local storage.
     axios
-      .get("web/accres", {
-        params: { filter: "lastTwelveMonths" },
+      .get("web/accrec", {
+        params: { filter: "thisYear" },
         headers: {
           Authorization:
             "bearer " + AuthenticationService.getCurrentUser("currentUser"),
@@ -46,9 +47,8 @@ const AccRec = () => {
         //Alters the Json data to fit the chart in a specific way.
         var actualData = res.data;
         var ExpectedData = actualData.map((obj: any) => {
-          var daysDue = parseInt(obj.daysDue);
 
-          if (daysDue <= 30) {
+      /*     if (daysDue <= 30) {
             obj.group = "1-30";
           } else if (daysDue >= 31 && daysDue < 61) {
             obj.group = "30-61";
@@ -56,7 +56,7 @@ const AccRec = () => {
             obj.group = "61-90";
           } else if (daysDue > 90) {
             obj.group = "Over 90";
-          }
+          } */
           // Get month number from date-string and then substract 1
           var monthNum = parseInt(obj.month) - 1;
           // Get month name from the array and adds years.
@@ -91,34 +91,43 @@ const AccRec = () => {
           }}
         >
           <CartesianGrid strokeDasharray="3 3" />
-          <XAxis dataKey="month" type="category" />
-          <YAxis dataKey="amount" type="category" />
+          <XAxis dataKey="month"  />
+          <YAxis  
+                   />
           <Tooltip />
           <Legend />
           <Line
-            dataKey="1-30"
+            dataKey="thirtyAmount"
             fill="#000080"
             stroke="#000080"
-            activeDot={{ r: 10 }}
+            type="monotone"
+            strokeWidth={2} 
+            activeDot={{ r: 7 }}
           />
-          <Line
-            dataKey="30-60"
+           <Line
+            dataKey="sixtyAmount"
             fill="#FF8C00"
             stroke="#FF8C00"
-            activeDot={{ r: 10 }}
+            type="monotone"
+            strokeWidth={2} 
+            activeDot={{ r: 7 }}
           />
           <Line
-            dataKey="60-90"
+            dataKey="ninetyAmount"
             fill="#DC143C"
             stroke="#DC143C"
-            activeDot={{ r: 10 }}
+            type="monotone"
+            strokeWidth={2} 
+            activeDot={{ r: 7 }}
           />
           <Line
-            dataKey="Over 90"
+            dataKey="ninetyPlusAmount"
             fill="#228B22"
             stroke="#228B22"
-            activeDot={{ r: 10 }}
-          />
+            strokeWidth={2} 
+            type="monotone"
+            activeDot={{ r: 7 }}
+          /> 
         </LineChart>
       </ResponsiveContainer>
     </div>
