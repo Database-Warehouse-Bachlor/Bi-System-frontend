@@ -147,7 +147,7 @@ function Dashboard() {
   }
   const classes = useStyles();
   return (
-    <div className={classes.background}>
+    <div className={classes.background} data-testid="chartcontainer">
       {/* Grid justification */}
       <Grid row={true}>
         <Grid
@@ -174,6 +174,7 @@ function Dashboard() {
                 title={accRes || "This Year"}
                 id="LineBarDrop"
                 onSelect={handleSelectAccRes}
+                data-testid="dropDownButton"
               >
                 <Dropdown.Item eventKey="Last 30 Days">Last 30 Days</Dropdown.Item>
                 <Dropdown.Item eventKey="Last 12 Months">Last 12 Months</Dropdown.Item>
