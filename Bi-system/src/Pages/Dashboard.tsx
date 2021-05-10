@@ -1,7 +1,4 @@
 import Grid from "../Components/Grid";
-import BarChart from "../Components/BarChart";
-import LineBarChart from "../Components/LineBarChart";
-import PieChart from "../Components/PieChart";
 import { makeStyles, Paper } from "@material-ui/core";
 import React, { useState } from "react";
 import { DropdownButton, Dropdown, ButtonToolbar } from "react-bootstrap";

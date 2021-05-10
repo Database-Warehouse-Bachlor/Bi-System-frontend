@@ -26,7 +26,20 @@ const renderCustomizedLabel = ({
 
 const AbcenseWeekly = () => {
 // Sets the names of all the months
-var monthsName = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG","SEP","OCT","NOV","DEC"];
+var monthsName = [
+"Jan",
+"Feb",
+"Mar",
+"Apr",
+"May",
+"Jun",
+"Jul",
+"Aug",
+"Sep",
+"Oct",
+"Nov",
+"Dec",
+];
 //Stores the chart data as a state
 const [chartData, setChartData] = useState();
 

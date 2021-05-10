@@ -9,24 +9,26 @@ import {
   Tooltip,
   ResponsiveContainer,
   Legend,
+  LabelList,
 } from "recharts";
 import AuthenticationService from "../../Services/AuthenticationService";
+
 
 const AccRec = () => {
   // Sets the names of all the months
   var monthsName = [
-    "JAN",
-    "FEB",
-    "MAR",
-    "APR",
-    "MAY",
-    "JUN",
-    "JUL",
-    "AUG",
-    "SEP",
-    "OCT",
-    "NOV",
-    "DEC",
+    "Jan         ",
+    "Feb         ",
+    "Mar         ",
+    "Apr         ",
+    "May         ",
+    "Jun         ",
+    "Jul         ",
+    "Aug         ",
+    "Sep         ",
+    "Oct         ",
+    "Nov         ",
+    "Dec         ",
   ];
   //Stores the chart data as a state
   const [chartData, setChartData] = useState();
@@ -46,16 +48,6 @@ const AccRec = () => {
         //Alters the Json data to fit the chart in a specific way.
         var actualData = res.data;
         var ExpectedData = actualData.map((obj: any) => {
-
-      /*     if (daysDue <= 30) {
-            obj.group = "1-30";
-          } else if (daysDue >= 31 && daysDue < 61) {
-            obj.group = "30-61";
-          } else if (daysDue >= 61 && daysDue <= 90) {
-            obj.group = "61-90";
-          } else if (daysDue > 90) {
-            obj.group = "Over 90";
-          } */
           // Get month number from date-string and then substract 1
           var monthNum = parseInt(obj.month) - 1;
           // Get month name from the array and adds years.
@@ -90,7 +82,7 @@ const AccRec = () => {
           }}
         >
           <CartesianGrid strokeDasharray="3 3" />
-          <XAxis dataKey="month"  />
+          <XAxis dataKey="month"  interval="preserveEnd"  />
           <YAxis  
                    />
           <Tooltip />
@@ -102,6 +94,7 @@ const AccRec = () => {
             type="monotone"
             activeDot={{ r: 10 }}
           />
+           <LabelList dataKey="month"/>
            <Line
             dataKey="sixtyAmount"
             fill="#FF8C00"
@@ -109,6 +102,7 @@ const AccRec = () => {
             type="monotone"
             activeDot={{ r: 10 }}
           />
+         
           <Line
             dataKey="ninetyAmount"
             fill="#DC143C"
