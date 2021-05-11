@@ -17,8 +17,8 @@ const AccRec = () => {
   // Sets the names of all the months
   var monthsName = [
     "Jan         ",
-    "Feb         ",
-    "Mar         ",
+    "Feb             ",
+    "Mar     ",
     "Apr         ",
     "Mai         ",
     "Jun         ",
@@ -80,7 +80,7 @@ const AccRec = () => {
           }}
         >
           <CartesianGrid strokeDasharray="3 3" />
-          <XAxis dataKey="month"  interval="preserveEnd"  />
+          <XAxis dataKey="month"  interval="preserveStartEnd"  />
           <YAxis  
                    />
           <Tooltip />
@@ -88,7 +88,7 @@ const AccRec = () => {
           <Line
             dataKey="thirtyAmount"
             name = "1-30 dager forsinket"
-            fill="#000080"
+           
             stroke="#000080"
             type="monotone"
             activeDot={{ r: 10 }}
@@ -96,7 +96,7 @@ const AccRec = () => {
            <Line
             dataKey="sixtyAmount"
             name = "31-60 dager forsinket"
-            fill="#FF8C00"
+           
             stroke="#FF8C00"
             type="monotone"
             activeDot={{ r: 10 }}
@@ -105,7 +105,7 @@ const AccRec = () => {
           <Line
             dataKey="ninetyAmount"
             name = "61-90 dager forsinket"
-            fill="#DC143C"
+            
             stroke="#DC143C"
             type="monotone"
             activeDot={{ r: 10 }}
@@ -113,7 +113,7 @@ const AccRec = () => {
           <Line
             dataKey="ninetyPlusAmount"
             name = "90 pluss dager forsinket"
-            fill="#228B22"
+          
             stroke="#228B22"
             type="monotone"
             activeDot={{ r: 10 }}

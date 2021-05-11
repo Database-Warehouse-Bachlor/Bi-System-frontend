@@ -80,44 +80,39 @@ const AccRec = () => {
           }}
         >
           <CartesianGrid strokeDasharray="3 3" />
-          <XAxis dataKey="month"  />
-          <YAxis  
-                   />
+          <XAxis dataKey="month" />
+          <YAxis />
           <Tooltip />
           <Legend />
           <Line
             dataKey="thirtyAmount"
-            name = "1-30 dager forsinket"
-            fill="#000080"
+            name="1-30 dager forsinket"
             stroke="#000080"
             type="monotone"
             activeDot={{ r: 10 }}
           />
-           <Line
+          <Line
             dataKey="sixtyAmount"
-            name = "31-60 dager forsinket"
-            fill="#FF8C00"
+            name="31-60 dager forsinket"
             stroke="#FF8C00"
             type="monotone"
             activeDot={{ r: 10 }}
           />
-         
+
           <Line
             dataKey="ninetyAmount"
-            name = "61-90 dager forsinket"
-            fill="#DC143C"
+            name="61-90 dager forsinket"
             stroke="#DC143C"
             type="monotone"
             activeDot={{ r: 10 }}
           />
           <Line
             dataKey="ninetyPlusAmount"
-            name = "90 pluss dager forsinket"
-            fill="#228B22"
+            name="90 pluss dager forsinket"
             stroke="#228B22"
             type="monotone"
             activeDot={{ r: 10 }}
-          /> 
+          />
         </LineChart>
       </ResponsiveContainer>
     </div>
