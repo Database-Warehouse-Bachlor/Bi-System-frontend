@@ -94,8 +94,8 @@ const Abcense = () => {
         <Legend />
         <Bar
           dataKey="totalDuration"
+          name = "Fravær"
           fill="#8884d8" stroke="#000080"
-          
         />
       </BarChart>
     </ResponsiveContainer>

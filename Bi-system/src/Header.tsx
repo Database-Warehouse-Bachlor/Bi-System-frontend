@@ -83,7 +83,7 @@ const Header: React.FC<Props> = ({ history }) => {
 
   const pageLinks = [
     {
-      pageTitle: "Dashboard",
+      pageTitle: "Dashbord",
       pageURL: "/Dashboard",
     },
     {

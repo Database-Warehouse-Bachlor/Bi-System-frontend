@@ -110,7 +110,7 @@ const AbcenseWeekly = () => {
       <YAxis dataKey="totalDuration" />
       <Tooltip />
       <Legend />
-      <Bar dataKey="totalDuration"  fill="#8884d8" stroke="#000080" />
+      <Bar name = "Fravær" dataKey="totalDuration"  fill="#8884d8" stroke="#000080" />
     </BarChart>
     </ResponsiveContainer>
   );

@@ -9,7 +9,6 @@ import {
   Tooltip,
   ResponsiveContainer,
   Legend,
-  LabelList,
 } from "recharts";
 import AuthenticationService from "../../Services/AuthenticationService";
 
@@ -21,14 +20,14 @@ const AccRec = () => {
     "Feb         ",
     "Mar         ",
     "Apr         ",
-    "May         ",
+    "Mai         ",
     "Jun         ",
     "Jul         ",
     "Aug         ",
     "Sep         ",
-    "Oct         ",
+    "Okt         ",
     "Nov         ",
-    "Dec         ",
+    "Des         ",
   ];
   //Stores the chart data as a state
   const [chartData, setChartData] = useState();
@@ -52,7 +51,6 @@ const AccRec = () => {
           var monthNum = parseInt(obj.month) - 1;
           // Get month name from the array and adds years.
           obj.month = monthsName[monthNum] + " " + obj.year;
-
           // Return the object
           return obj;
         });
@@ -89,14 +87,15 @@ const AccRec = () => {
           <Legend />
           <Line
             dataKey="thirtyAmount"
+            name = "1-30 dager forsinket"
             fill="#000080"
             stroke="#000080"
             type="monotone"
             activeDot={{ r: 10 }}
           />
-           <LabelList dataKey="month"/>
            <Line
             dataKey="sixtyAmount"
+            name = "31-60 dager forsinket"
             fill="#FF8C00"
             stroke="#FF8C00"
             type="monotone"
@@ -105,6 +104,7 @@ const AccRec = () => {
          
           <Line
             dataKey="ninetyAmount"
+            name = "61-90 dager forsinket"
             fill="#DC143C"
             stroke="#DC143C"
             type="monotone"
@@ -112,6 +112,7 @@ const AccRec = () => {
           />
           <Line
             dataKey="ninetyPlusAmount"
+            name = "90 pluss dager forsinket"
             fill="#228B22"
             stroke="#228B22"
             type="monotone"

@@ -107,6 +107,7 @@ const chart = () => {
         <Tooltip />
         <Legend />
         <Bar
+          name = "Fravær"
           dataKey="totalDuration"
           fill="#8884d8" stroke="#000080"
           
