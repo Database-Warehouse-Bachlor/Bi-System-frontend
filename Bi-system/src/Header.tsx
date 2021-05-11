@@ -64,15 +64,8 @@ const Header: React.FC<Props> = ({ history }) => {
   }
 
   const handleMenuClick = (pageURL: string) => {
-    if (pageURL == "Dashboard" && localStorage.getItem("currentUser") == null) {
-      history.push("/");
-      setAnchorEl(null);
-    }
-    else {
       history.push(pageURL);
-      setAnchorEl(null);
-    }
-    
+      setAnchorEl(null); 
   };
   /**
    * A list of urls and their titles for the Header, 
@@ -82,6 +75,7 @@ const Header: React.FC<Props> = ({ history }) => {
    */
 
   const pageLinks = [
+ 
     {
       pageTitle: "Dashboard",
       pageURL: "/Dashboard",
@@ -97,6 +91,9 @@ const Header: React.FC<Props> = ({ history }) => {
   ];
 
   return (
+    /* 
+    * Logo and title, same for all screens.
+    */
     <div className={classes.root}>
       <AppBar position="static" className={classes.header}>
         <Toolbar>
@@ -107,6 +104,9 @@ const Header: React.FC<Props> = ({ history }) => {
           <div>
             {isMobile ? (
               <>
+              {/*  
+              * The Icon and menu if the screensize is below
+              */}
                 <IconButton
                   edge="end"
                   className={classes.menuButton}
@@ -142,6 +142,10 @@ const Header: React.FC<Props> = ({ history }) => {
                 </Menu>
               </>
             ) : (
+              /* 
+              * If the screen si more than 600px, shows the additional pages
+              * as singular buttons.
+              */
               <div className={classes.pcButtons}>
                 {pageLinks.map((pageLink) => {
                   const { pageTitle, pageURL } = pageLink;

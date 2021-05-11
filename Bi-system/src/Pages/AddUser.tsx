@@ -66,7 +66,7 @@ export const Login: React.FC<Props> = () => {
                 pwd: string().required("Vennligst skriv inn passord"),
                 pwd2: string()
                   .required("Vennligst gjenta passord")
-                  .oneOf([ref("pwd"), null], "Passwords must match"),
+                  .oneOf([ref("pwd"), null], "Passordene må være like"),
               })}
 
               onSubmit={async (values) => {
@@ -114,7 +114,7 @@ export const Login: React.FC<Props> = () => {
                     <Field
                       name="pwd"
                       type="Password"
-                      label="Password"
+                      label="Passord"
                       as={TextField}
                     />
                     <ErrorMessage name="pwd">
@@ -127,7 +127,7 @@ export const Login: React.FC<Props> = () => {
                     <Field
                       name="pwd2"
                       type="Password"
-                      label="Confirm Password"
+                      label="Gjenta Passord"
                       as={TextField}
                     />
                     <ErrorMessage name="pwd2">

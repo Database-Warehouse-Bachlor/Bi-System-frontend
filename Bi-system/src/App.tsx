@@ -7,7 +7,6 @@ import AddUser from "./Pages/AddUser";
 import grey from "@material-ui/core/colors/brown";
 import Logout from "./Pages/Logout";
 import PrivateRoute from "./Components/PrivateRoute";
-import { Helmet } from 'react-helmet'
 function App() {
 
   /* Route service for the web app
