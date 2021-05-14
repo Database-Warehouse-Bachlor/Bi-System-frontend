@@ -4,6 +4,8 @@ import React, { useState } from "react";
 import { DropdownButton, Dropdown, ButtonToolbar } from "react-bootstrap";
 import Absence from "../Components/AbsenceRegisters/AbsenceRegisterChart";
 import AccountRecLast12Months from "../Components/AccountReceivableCharts/AccountReceivableChart";
+import EmployeeGender from "../Components/PieCharts/EmloyeeGender";
+import ClientPie from "../Components/PieCharts/ClientType";
 import AccountRecThisYear from "../Components/AccountReceivableCharts/AccountReceivableThisYearChart";
 import AccountRecLastMonth from "../Components/AccountReceivableCharts/AccountReceivableMonthChart";
 import AbsenceWeekly from "../Components/AbsenceRegisters/AbsenceRegisterWeeklyChart";
@@ -39,32 +41,27 @@ function Dashboard() {
 
   /* Handles the filter value selected */
   const handleSelectAccRes = (e: any) => {
-    if (e == "Last 30 Days" ) {
-      setAccResName("Siste 30 Dager")
-    }
-    else if (e == "thisYear" ) {
-      setAccResName("Dette Året")
-    }
-    else if (e == "Last 12 Months" ) {
-      setAccResName("Siste 12 Måneder")
+    if (e == "Last 30 Days") {
+      setAccResName("Siste 30 Dager");
+    } else if (e == "thisYear") {
+      setAccResName("Dette Året");
+    } else if (e == "Last 12 Months") {
+      setAccResName("Siste 12 Måneder");
     }
     setAccRes(e);
   };
   const handleSelectAbsence = (e: any) => {
-    if (e == "Last 7 Days" ) {
-      setAbsenceName("Siste 7 Dager")
+    if (e == "Last 7 Days") {
+      setAbsenceName("Siste 7 Dager");
     }
-    if (e == "Last 30 Days" ) {
-      setAbsenceName("Siste 30 Dager")
-    }
-    else if (e == "thisYear" ) {
-      setAbsenceName("Dette Året")
-    }
-    else if (e == "thisWeek" ) {
-      setAbsenceName("Denne Uken")
-    }
-    else if (e == "Last 12 Months" ) {
-      setAbsenceName("Siste 12 Måneder")
+    if (e == "Last 30 Days") {
+      setAbsenceName("Siste 30 Dager");
+    } else if (e == "thisYear") {
+      setAbsenceName("Dette Året");
+    } else if (e == "thisWeek") {
+      setAbsenceName("Denne Uken");
+    } else if (e == "Last 12 Months") {
+      setAbsenceName("Siste 12 Måneder");
     }
     setAbsence(e);
   };
@@ -79,7 +76,13 @@ function Dashboard() {
     },
     tennantName: {},
     background: {
-      height: "100vh",
+      height: "120vh",
+    },
+    pieChart: {
+      textAlign: "center" as "center"
+    },
+    dropdown: {
+      backgroundColor = "#000000"
     },
   }));
 
@@ -192,7 +195,7 @@ function Dashboard() {
         >
           <Paper className={classes.blackPaper} elevation={10}>
             <div className={classes.label}>
-              <DropdownButton
+              <DropdownButton className={classes.dropdown}
                 alignRight
                 title={accResName || "Dette Året"}
                 id="LineBarDrop"
@@ -203,7 +206,7 @@ function Dashboard() {
                   Siste 30 dager
                 </Dropdown.Item>
                 <Dropdown.Item eventKey="Last 12 Months">
-                Siste 12 Måneder
+                  Siste 12 Måneder
                 </Dropdown.Item>
                 <Dropdown.Item eventKey="thisYear"> Dette Året </Dropdown.Item>
               </DropdownButton>
@@ -234,10 +237,10 @@ function Dashboard() {
                 onSelect={handleSelectAbsence}
               >
                 <Dropdown.Item eventKey="Last 7 Days">
-                Siste 7 dager
+                  Siste 7 dager
                 </Dropdown.Item>
                 <Dropdown.Item eventKey="Last 30 Days">
-                Siste 30 dager
+                  Siste 30 dager
                 </Dropdown.Item>
                 <Dropdown.Item eventKey="Last 12 Months">
                   {" "}
@@ -263,6 +266,33 @@ function Dashboard() {
             {switchCaseAbsence()}
           </Paper>
         </Grid>
+        <Grid
+          column={true}
+          sm={12}
+          md={4}
+          justify={"flex-end"}
+          alignItems={"flex-end"}
+        >
+          <Paper className={classes.blackPaper} elevation={10}>
+          <h3 className ={classes.pieChart}>Klienttyper</h3>
+          <ClientPie/>
+          </Paper>
+          </Grid>
+          <Grid
+          column={true}
+          sm={12}
+          md={4}
+          justify={"flex-end"}
+          alignItems={"flex-end"}
+        >
+          <Paper className={classes.blackPaper} elevation={10}>
+            
+          <h3 className ={classes.pieChart}>Kjønnsfordeling</h3> 
+          <EmployeeGender/>
+          </Paper>
+          </Grid>
+          
+        
       </Grid>
     </div>
   );
