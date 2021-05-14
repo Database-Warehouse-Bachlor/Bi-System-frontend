@@ -27,7 +27,20 @@ const renderCustomizedLabel = ({
 
 const AbcenseMonthly = () => {
 // Sets the names of all the months
-var monthsName = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG","SEP","OCT","NOV","DEC"];
+var monthsName = [  
+"Jan",
+"Feb",
+"Mar",
+"Apr",
+"May",
+"Jun",
+"Jul",
+"Aug",
+"Sep",
+"Oct",
+"Nov",
+"Dec",
+];
 //Stores the chart data as a state
 const [chartData, setChartData] = useState();
 
@@ -99,7 +112,7 @@ const chart = () => {
       <YAxis dataKey="totalDuration" />
       <Tooltip />
       <Legend />
-      <Bar dataKey="totalDuration"  fill="#8884d8" stroke="#000080"  />
+      <Bar name = "Fravær" dataKey="totalDuration"  fill="#8884d8" stroke="#000080"  />
     </BarChart>
     </ResponsiveContainer>
   );

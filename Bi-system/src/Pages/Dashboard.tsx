@@ -1,14 +1,11 @@
 import Grid from "../Components/Grid";
-import BarChart from "../Components/BarChart";
-import LineBarChart from "../Components/LineBarChart";
-import PieChart from "../Components/PieChart";
 import { makeStyles, Paper } from "@material-ui/core";
 import React, { useState } from "react";
 import { DropdownButton, Dropdown, ButtonToolbar } from "react-bootstrap";
 import Absence from "../Components/AbsenceRegisters/AbsenceRegisterChart";
-import AccountRecLast12Months from "../Components/AccountReceivableCharts/AccountReceivableChart"
-import AccountRecThisYear from "../Components/AccountReceivableCharts/AccountReceivableThisYearChart"
-import AccountRecLastMonth from "../Components/AccountReceivableCharts/AccountReceivableMonthChart"
+import AccountRecLast12Months from "../Components/AccountReceivableCharts/AccountReceivableChart";
+import AccountRecThisYear from "../Components/AccountReceivableCharts/AccountReceivableThisYearChart";
+import AccountRecLastMonth from "../Components/AccountReceivableCharts/AccountReceivableMonthChart";
 import AbsenceWeekly from "../Components/AbsenceRegisters/AbsenceRegisterWeeklyChart";
 import AbsenceMontly from "../Components/AbsenceRegisters/AbsenceRegisterMonthlyChart";
 import AbsenceThisYear from "../Components/AbsenceRegisters/AbsenceRegisterChartThisYear";
@@ -22,7 +19,9 @@ import axios from "axios";
 /* useState hooks for storing values*/
 function Dashboard() {
   const [accRes, setAccRes] = useState("");
+  const [accResName, setAccResName] = useState("");
   const [absence, setAbsence] = useState("");
+  const [absenceName, setAbsenceName] = useState("");
   const [tennantName, setTennantName] = React.useState("");
 
   /* Api call for setting the name of the logged in tennant */
@@ -40,9 +39,33 @@ function Dashboard() {
 
   /* Handles the filter value selected */
   const handleSelectAccRes = (e: any) => {
+    if (e == "Last 30 Days" ) {
+      setAccResName("Siste 30 Dager")
+    }
+    else if (e == "thisYear" ) {
+      setAccResName("Dette Året")
+    }
+    else if (e == "Last 12 Months" ) {
+      setAccResName("Siste 12 Måneder")
+    }
     setAccRes(e);
   };
   const handleSelectAbsence = (e: any) => {
+    if (e == "Last 7 Days" ) {
+      setAbsenceName("Siste 7 Dager")
+    }
+    if (e == "Last 30 Days" ) {
+      setAbsenceName("Siste 30 Dager")
+    }
+    else if (e == "thisYear" ) {
+      setAbsenceName("Dette Året")
+    }
+    else if (e == "thisWeek" ) {
+      setAbsenceName("Denne Uken")
+    }
+    else if (e == "Last 12 Months" ) {
+      setAbsenceName("Siste 12 Måneder")
+    }
     setAbsence(e);
   };
   /* Inline CSS used for styling */
@@ -96,7 +119,7 @@ function Dashboard() {
         );
     }
   }
-  
+
   function switchCaseAbsence() {
     switch (absence) {
       case "Last 7 Days":
@@ -122,14 +145,14 @@ function Dashboard() {
             <Absence />
           </div>
         );
-      case "This Week":
+      case "thisWeek":
         console.log(absence);
         return (
           <div>
             <AbsenceThisWeek />
           </div>
         );
-      case "This Year":
+      case "thisYear":
         console.log(absence);
         return (
           <div>
@@ -171,14 +194,18 @@ function Dashboard() {
             <div className={classes.label}>
               <DropdownButton
                 alignRight
-                title={accRes || "This Year"}
+                title={accResName || "Dette Året"}
                 id="LineBarDrop"
                 onSelect={handleSelectAccRes}
                 data-testid="dropDownButton"
               >
-                <Dropdown.Item eventKey="Last 30 Days">Last 30 Days</Dropdown.Item>
-                <Dropdown.Item eventKey="Last 12 Months">Last 12 Months</Dropdown.Item>
-                <Dropdown.Item eventKey="This Year"> This Year </Dropdown.Item>
+                <Dropdown.Item eventKey="Last 30 Days">
+                  Siste 30 dager
+                </Dropdown.Item>
+                <Dropdown.Item eventKey="Last 12 Months">
+                Siste 12 Måneder
+                </Dropdown.Item>
+                <Dropdown.Item eventKey="thisYear"> Dette Året </Dropdown.Item>
               </DropdownButton>
               {/* Adding colums so that the title of the graph is on the right */}
               <h3></h3>
@@ -191,7 +218,7 @@ function Dashboard() {
               <h3></h3>
               <h3></h3>
               <h3></h3>
-              <h3>Accounts receivable</h3>
+              <h3>Kundefordringer</h3>
             </div>
 
             {switchCaseAccountsReceivable()}
@@ -202,23 +229,23 @@ function Dashboard() {
             <div className={classes.label}>
               <DropdownButton
                 alignRight
-                title={absence || "Last 12 Months"}
+                title={absenceName || "Siste 12 Måneder"}
                 id="absenceRegisterDrop"
                 onSelect={handleSelectAbsence}
               >
                 <Dropdown.Item eventKey="Last 7 Days">
-                  Last 7 Days
+                Siste 7 dager
                 </Dropdown.Item>
                 <Dropdown.Item eventKey="Last 30 Days">
-                  Last 30 Days
+                Siste 30 dager
                 </Dropdown.Item>
                 <Dropdown.Item eventKey="Last 12 Months">
                   {" "}
-                  Last 12 Months{" "}
+                  Siste 12 Måneder{" "}
                 </Dropdown.Item>
                 <Dropdown.Divider />
-                <Dropdown.Item eventKey="This Year"> This Year </Dropdown.Item>
-                <Dropdown.Item eventKey="This Week"> This Week </Dropdown.Item>
+                <Dropdown.Item eventKey="thisYear"> Dette året </Dropdown.Item>
+                <Dropdown.Item eventKey="thisWeek"> Denne Uken </Dropdown.Item>
               </DropdownButton>
               {/* Adding colums so that the title of the graph is on the right */}
               <h3></h3>
@@ -231,7 +258,7 @@ function Dashboard() {
               <h3></h3>
               <h3></h3>
               <h3></h3>
-              <h3>Absence data</h3>
+              <h3>Fraværsdata</h3>
             </div>
             {switchCaseAbsence()}
           </Paper>

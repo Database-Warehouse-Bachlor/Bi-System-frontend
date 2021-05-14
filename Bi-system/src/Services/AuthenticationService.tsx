@@ -49,7 +49,6 @@ function login(email: string, pwd: string) {
         .then(token => {
             // store user details and jwt token in local storage to keep user logged in between page refreshes
             localStorage.setItem('currentUser', (token));
-            console.log("token is ", token)
             currentUserSubject.next(token);
             return token;
       

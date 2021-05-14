@@ -1,4 +1,3 @@
-
 import axios from "axios";
 import React, { PureComponent, useEffect, useState } from "react";
 import {
@@ -16,18 +15,18 @@ import AuthenticationService from "../../Services/AuthenticationService";
 const AccRec = () => {
   // Sets the names of all the months
   var monthsName = [
-    "JAN",
-    "FEB",
-    "MAR",
-    "APR",
-    "MAY",
-    "JUN",
-    "JUL",
-    "AUG",
-    "SEP",
-    "OCT",
-    "NOV",
-    "DEC",
+    "Jan                                              ",
+    "Feb                                                            ",
+    "Mar                                                 ",
+    "Apr                                           ",
+    "Mai         ",
+    "Jun         ",
+    "Jul         ",
+    "Aug         ",
+    "Sep         ",
+    "Okt         ",
+    "Nov         ",
+    "Des         ",
   ];
   //Stores the chart data as a state
   const [chartData, setChartData] = useState();
@@ -47,25 +46,13 @@ const AccRec = () => {
         //Alters the Json data to fit the chart in a specific way.
         var actualData = res.data;
         var ExpectedData = actualData.map((obj: any) => {
-
-      /*     if (daysDue <= 30) {
-            obj.group = "1-30";
-          } else if (daysDue >= 31 && daysDue < 61) {
-            obj.group = "30-61";
-          } else if (daysDue >= 61 && daysDue <= 90) {
-            obj.group = "61-90";
-          } else if (daysDue > 90) {
-            obj.group = "Over 90";
-          } */
           // Get month number from date-string and then substract 1
           var monthNum = parseInt(obj.month) - 1;
           // Get month name from the array and adds years.
           obj.month = monthsName[monthNum] + " " + obj.year;
-
           // Return the object
           return obj;
         });
-
         setChartData(ExpectedData);
       })
       .catch((err) => {
@@ -91,43 +78,39 @@ const AccRec = () => {
           }}
         >
           <CartesianGrid strokeDasharray="3 3" />
-          <XAxis dataKey="month"  />
-          <YAxis  
-                   />
+          <XAxis dataKey="month" interval="preserveStartEnd" />
+          <YAxis />
           <Tooltip />
           <Legend />
           <Line
             dataKey="thirtyAmount"
-            fill="#000080"
+            name="1-30 dager forsinket"
             stroke="#000080"
             type="monotone"
-            strokeWidth={2} 
-            activeDot={{ r: 7 }}
-          />
-           <Line
-            dataKey="sixtyAmount"
-            fill="#FF8C00"
-            stroke="#FF8C00"
-            type="monotone"
-            strokeWidth={2} 
-            activeDot={{ r: 7 }}
+            activeDot={{ r: 10 }}
           />
           <Line
+            dataKey="sixtyAmount"
+            name="31-60 dager forsinket"
+            stroke="#FF8C00"
+            type="monotone"
+            activeDot={{ r: 10 }}
+          />
+
+          <Line
             dataKey="ninetyAmount"
-            fill="#DC143C"
+            name="61-90 dager forsinket"
             stroke="#DC143C"
             type="monotone"
-            strokeWidth={2} 
-            activeDot={{ r: 7 }}
+            activeDot={{ r: 10 }}
           />
           <Line
             dataKey="ninetyPlusAmount"
-            fill="#228B22"
+            name="90 pluss dager forsinket"
             stroke="#228B22"
-            strokeWidth={2} 
             type="monotone"
-            activeDot={{ r: 7 }}
-          /> 
+            activeDot={{ r: 10 }}
+          />
         </LineChart>
       </ResponsiveContainer>
     </div>
