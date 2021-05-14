@@ -2,7 +2,7 @@
   "name": "pocwebsite",
   "version": "0.1.0",
   "private": true,
-  "proxy": "https://run.mocky.io/v3/",
+  "proxy": "https://localhost:5001/",
   "dependencies": {
     "@material-ui/core": "^4.11.3",
     "@material-ui/icons": "^4.11.2",
@@ -20,6 +20,7 @@
     "bootstrap": "^4.6.0",
     "chart.js": "^3.0.2",
     "config": "^3.3.6",
+    "form-data": "^4.0.0",
     "formik": "^2.2.6",
     "formik-material-ui": "^3.0.1",
     "http-handler-response": "^0.10.0",
@@ -27,12 +28,15 @@
     "material-ui-icons": "^1.0.0-beta.36",
     "ng2-charts": "^2.4.2",
     "prop-types": "^15.7.2",
+    "qs": "^6.10.1",
     "react": "^17.0.1",
     "react-bootstrap": "^1.5.2",
     "react-chartjs-2": "^2.11.1",
+    "react-datetime": "^3.0.4",
     "react-dom": "^17.0.1",
     "react-dropdown": "^1.9.2",
     "react-dropdown-button": "^1.0.11",
+    "react-helmet": "^6.1.0",
     "react-scripts": "^4.0.2",
     "recharts": "^2.0.6",
     "rxjs": "^6.6.6",
@@ -66,6 +70,7 @@
   },
   "devDependencies": {
     "@types/config": "0.0.38",
+    "@types/react-helmet": "^6.1.1",
     "@types/react-router-dom": "^5.1.7",
     "react-router-dom": "^5.2.0"
   }

@@ -1,7 +1,9 @@
 export class User {
     
 
-    //Fields 
+    /* Class model of a User */
+
+    //User fields
     orgnr: string
     email: string
     password: string
@@ -13,7 +15,3 @@ export class User {
        this.password = password
 
     }}
-
-    function orgnr() {
-       return orgnr
-    }

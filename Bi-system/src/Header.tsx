@@ -15,7 +15,9 @@ import Menu from "@material-ui/core/Menu";
 import { RouteComponentProps, withRouter } from "react-router-dom";
 import logo from "./logo.png";
 import { Button, useMediaQuery } from "@material-ui/core";
+import Dashboard from "./Pages/Dashboard";
 
+/* Inline CSS styles for the header */
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     header: {
@@ -59,29 +61,38 @@ const Header: React.FC<Props> = ({ history }) => {
 
   const handleMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
-  };
+  }
 
   const handleMenuClick = (pageURL: string) => {
-    history.push(pageURL);
-    setAnchorEl(null);
+    if (pageURL == "Dashboard" && localStorage.getItem("currentUser") == null) {
+      history.push("/");
+      setAnchorEl(null);
+    }
+    else {
+      history.push(pageURL);
+      setAnchorEl(null);
+    }
+    
   };
   /**
-   * A list of urls and their titles for the Header, making it easier to add more pages to the website.
-   * Adding a new element into this list will automatically display it in the header menu or as buttons depending on screensize
+   * A list of urls and their titles for the Header, 
+   * making it easier to add more pages to the website.
+   * Adding a new element into this list will automatically 
+   * display it in the header menu or as buttons depending on screensize
    */
 
   const pageLinks = [
     {
-      pageTitle: "Login",
-      pageURL: "/",
-    },
-    {
-      pageTitle: "Kontakt oss",
-      pageURL: "/contact",
+      pageTitle: "Dashbord",
+      pageURL: "/Dashboard",
     },
     {
       pageTitle: "Legg Til Bruker",
       pageURL: "/AddUser",
+    },
+    {
+      pageTitle: "Logg ut",
+      pageURL: "/logout",
     },
   ];
 
@@ -89,7 +100,9 @@ const Header: React.FC<Props> = ({ history }) => {
     <div className={classes.root}>
       <AppBar position="static" className={classes.header}>
         <Toolbar>
+        <a href = {"/Dashboard"}>
           <img className={classes.logo} src={logo} alt="logo" />
+          </a>
           <Typography className={classes.title}></Typography>
           <div>
             {isMobile ? (

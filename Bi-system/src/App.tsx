@@ -1,27 +1,26 @@
 import React from "react";
 import { Switch, BrowserRouter as Router, Route } from "react-router-dom";
 import Dashboard from "./Pages/Dashboard";
-import Contact from "./Pages/Contact";
 import Login from "./Pages/Login";
 import Header from "./Header";
 import AddUser from "./Pages/AddUser";
-import grey from "@material-ui/core/colors/brown";
-function App() {
+import Logout from "./Pages/Logout";
+import PrivateRoute from "./Components/PrivateRoute";
 
-  
+function App() {
+  /* Route service for the web app
+  Private Route redirects back to login if not logged in, cant watch dashboard
+  or add user if not logged in. */
   return (
-    <div style={{background: grey[100]}}>
     <Router>
       {<Header />}
       <Switch>
-        <Route path="/" exact component={Dashboard} />
-        <Route path="/contact" exact component={Contact} />
-        <Route path="/dashboard" exact component={Login} />
-        <Route path="/AddUser" exact component={AddUser} />
+        <Route path="/" exact component={Login} />
+        <PrivateRoute path="/dashboard" component={Dashboard} />
+        <PrivateRoute path="/AddUser" exact component={AddUser} />
+        <PrivateRoute path="/logout" exact component={Logout} />
       </Switch>
     </Router>
-    </div>
-
   );
 }
 
