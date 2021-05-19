@@ -111,7 +111,7 @@ const chart = () => {
       <YAxis dataKey="totalDuration" />
       <Tooltip />
       <Legend />
-      <Bar name = "Fravær" dataKey="totalDuration"  fill="#8884d8" stroke="#000080"  />
+      <Bar name = "Fravær" dataKey="totalDuration"  fill="#eb6707" stroke="#000000"  />
     </BarChart>
     </ResponsiveContainer>
   );

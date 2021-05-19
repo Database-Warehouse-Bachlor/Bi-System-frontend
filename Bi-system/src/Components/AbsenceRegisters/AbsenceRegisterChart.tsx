@@ -89,8 +89,8 @@ const Abcense = () => {
         <Bar
           dataKey="totalDuration"
           name="Fravær"
-          fill="#8884d8"
-          stroke="#000080"
+          fill="#eb6707"
+          stroke="#000000"
         />
       </BarChart>
     </ResponsiveContainer>
