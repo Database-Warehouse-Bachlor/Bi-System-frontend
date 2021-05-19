@@ -6,11 +6,7 @@ An application used to show business related data form Cordel Norge's systems ba
 
 ## Project Status
 
-This project is a MVP. Its still in development, but is finished 
-
-#### Example:
-
-This project is currently in development. Users can filter tweets by username and keyword and see visual data representation. Functionality to sort by additional parameters is in progress.
+This project is a MVP. Its still in development, but our work on this project is finished.
 
 ## Project Screen Shots
 
