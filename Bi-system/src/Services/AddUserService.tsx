@@ -23,8 +23,6 @@ async function getTennantName() {
       })
 }
 
-        
-
 /* Sends an email and password to the Api to add a new user 
 under the logged in Tennant */
 function register(email: string, pwd: string) {

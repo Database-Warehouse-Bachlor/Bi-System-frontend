@@ -12,7 +12,6 @@ import AbsenceWeekly from "../Components/AbsenceRegisters/AbsenceRegisterWeeklyC
 import AbsenceMontly from "../Components/AbsenceRegisters/AbsenceRegisterMonthlyChart";
 import AbsenceThisYear from "../Components/AbsenceRegisters/AbsenceRegisterChartThisYear";
 import AbsenceThisWeek from "../Components/AbsenceRegisters/AbsenceRegisterChartThisWeek";
-
 import "bootstrap/dist/css/bootstrap.min.css";
 import grey from "@material-ui/core/colors/grey";
 import AuthenticationService from "../Services/AuthenticationService";
@@ -83,8 +82,8 @@ function Dashboard() {
     },
   }));
 
-  /* Switch cases for changing the view when the dropdown filter change happens 
-  Une switchCase for each of the graphs*/
+  /* Switch cases for changing the view when the dropdown 
+  filter on Accounts receivable graph changes */
   function switchCaseAccountsReceivable() {
     switch (accRes) {
       case "Last 30 Days":
@@ -119,7 +118,8 @@ function Dashboard() {
         );
     }
   }
-
+  /* Switch cases for changing the view when the dropdown 
+  filter on absence graph changes */
   function switchCaseAbsence() {
     switch (absence) {
       case "Last 7 Days":
@@ -233,7 +233,7 @@ function Dashboard() {
                 id="absenceRegisterDrop"
                 onSelect={handleSelectAbsence}
               >
-                 <Dropdown.Menu style={{backgroundColor:'#73a47'}}>
+                
                 <Dropdown.Item eventKey="Last 7 Days">
                   Siste 7 dager
                 </Dropdown.Item>
@@ -241,13 +241,12 @@ function Dashboard() {
                   Siste 30 dager
                 </Dropdown.Item>
                 <Dropdown.Item eventKey="Last 12 Months">
-                  {" "}
-                  Siste 12 Måneder{" "}
+                  Siste 12 Måneder
                 </Dropdown.Item>
                 <Dropdown.Divider />
                 <Dropdown.Item eventKey="thisYear"> Dette året </Dropdown.Item>
                 <Dropdown.Item eventKey="thisWeek"> Denne Uken </Dropdown.Item>
-                </Dropdown.Menu>
+          
               </DropdownButton>
               {/* Adding colums so that the title of the graph is on the right */}
               <h3></h3>
@@ -287,6 +286,19 @@ function Dashboard() {
           <Paper className={classes.blackPaper} elevation={10}>
             
           <h3 className ={classes.pieChart}>Kjønnsfordeling</h3> 
+          <EmployeeGender/>
+          </Paper>
+          </Grid>
+          <Grid
+          column={true}
+          sm={12}
+          md={4}
+          justify={"flex-end"}
+          alignItems={"flex-end"}
+        >
+          <Paper className={classes.blackPaper} elevation={10}>
+            
+          <h3 className ={classes.pieChart}>Filler</h3> 
           <EmployeeGender/>
           </Paper>
           </Grid>

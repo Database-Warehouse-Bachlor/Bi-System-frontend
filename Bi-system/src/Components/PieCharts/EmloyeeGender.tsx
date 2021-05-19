@@ -15,11 +15,11 @@ const EmployeeGender = () => {
   const [FemaleNr, setFemaleNr] = useState();
 
   const data = [
-    { name: "Males", value: maleNr },
-    { name: "Females", value: FemaleNr },
+    { name: "Menn", value: maleNr },
+    { name: "Kvinner", value: FemaleNr },
   ];
   const chart = () => {
-    //Api call to the backend getting the information about Absence the last twelve months.
+    //Api call to the backend getting the information about number of males and females.
     //Authorizes using token stored in local storage.
     axios
       .get("web/employeenumber", {
@@ -36,6 +36,8 @@ const EmployeeGender = () => {
         console.log(err);
       });
   };
+
+  //colors on the pie chart.
 
   const COLORS = ["#0088FE", "#00C49F"];
 
@@ -55,6 +57,7 @@ const EmployeeGender = () => {
           <Pie
             data={data}
             labelLine={true}
+            isAnimationActive={false}
             label = {renderLabel}
             outerRadius={80}
             fill="#eb6707"
