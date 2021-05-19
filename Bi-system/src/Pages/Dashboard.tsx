@@ -81,9 +81,6 @@ function Dashboard() {
     pieChart: {
       textAlign: "center" as "center"
     },
-    dropdown: {
-      backgroundColor = "#000000"
-    },
   }));
 
   /* Switch cases for changing the view when the dropdown filter change happens 
@@ -195,7 +192,7 @@ function Dashboard() {
         >
           <Paper className={classes.blackPaper} elevation={10}>
             <div className={classes.label}>
-              <DropdownButton className={classes.dropdown}
+              <DropdownButton 
                 alignRight
                 title={accResName || "Dette Året"}
                 id="LineBarDrop"
@@ -236,6 +233,7 @@ function Dashboard() {
                 id="absenceRegisterDrop"
                 onSelect={handleSelectAbsence}
               >
+                 <Dropdown.Menu style={{backgroundColor:'#73a47'}}>
                 <Dropdown.Item eventKey="Last 7 Days">
                   Siste 7 dager
                 </Dropdown.Item>
@@ -249,6 +247,7 @@ function Dashboard() {
                 <Dropdown.Divider />
                 <Dropdown.Item eventKey="thisYear"> Dette året </Dropdown.Item>
                 <Dropdown.Item eventKey="thisWeek"> Denne Uken </Dropdown.Item>
+                </Dropdown.Menu>
               </DropdownButton>
               {/* Adding colums so that the title of the graph is on the right */}
               <h3></h3>
