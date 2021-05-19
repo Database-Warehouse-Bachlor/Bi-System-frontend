@@ -14,6 +14,5 @@ test('Dropdown renders', async() =>{
   await act(async () => {
     const { getByTestId } = render(<Dashboard />);
     expect(getByTestId("dropDownButton")).toBeTruthy();
-
 });
 });

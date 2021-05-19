@@ -12,7 +12,6 @@ import AbsenceWeekly from "../Components/AbsenceRegisters/AbsenceRegisterWeeklyC
 import AbsenceMontly from "../Components/AbsenceRegisters/AbsenceRegisterMonthlyChart";
 import AbsenceThisYear from "../Components/AbsenceRegisters/AbsenceRegisterChartThisYear";
 import AbsenceThisWeek from "../Components/AbsenceRegisters/AbsenceRegisterChartThisWeek";
-
 import "bootstrap/dist/css/bootstrap.min.css";
 import grey from "@material-ui/core/colors/grey";
 import AuthenticationService from "../Services/AuthenticationService";
@@ -83,8 +82,8 @@ function Dashboard() {
     },
   }));
 
-  /* Switch cases for changing the view when the dropdown filter change happens 
-  Une switchCase for each of the graphs*/
+  /* Switch cases for changing the view when the dropdown 
+  filter on Accounts receivable graph changes */
   function switchCaseAccountsReceivable() {
     switch (accRes) {
       case "Last 30 Days":
@@ -119,7 +118,8 @@ function Dashboard() {
         );
     }
   }
-
+  /* Switch cases for changing the view when the dropdown 
+  filter on absence graph changes */
   function switchCaseAbsence() {
     switch (absence) {
       case "Last 7 Days":

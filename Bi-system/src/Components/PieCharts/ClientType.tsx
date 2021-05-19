@@ -19,7 +19,7 @@ const EmployeeGender = () => {
     { name: "Leverandør", value: supplierNr },
   ];
   const chart = () => {
-    //Api call to the backend getting the information about Absence the last twelve months.
+    //Api call to the backend getting the information about Client numbers
     //Authorizes using token stored in local storage.
     axios
       .get("web/clientnumbers", {
@@ -37,6 +37,8 @@ const EmployeeGender = () => {
       });
   };
 
+
+//Colors of pie chart
   const COLORS = ["#0088FE", "#00C49F"];
 
   let renderLabel = function(entry:any) {
