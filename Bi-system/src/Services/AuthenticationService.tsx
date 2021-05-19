@@ -6,7 +6,6 @@ import { handleResponse } from '../Helpers/HandleResponse';
 const token = localStorage.getItem('currentUser')
 const currentUserSubject = new BehaviorSubject((token || '{}'));
 
-
 export const AuthenticationService = {
     login,
     logout,
@@ -22,18 +21,14 @@ export const AuthenticationService = {
         return true;
       },
       getCurrentUser: function(key: string) {
-        
         var token = localStorage.getItem(key);
         return token
-       
       },
       removeCurrentUser: function() {
         if (!this.isReady()) throw new Error("Cannot find localStorage");
         localStorage.removeItem('currentUser');
         return true;
-      }
-      
-      
+      }     
 };
 
 /* Makes an Api call and send the email and password  */
@@ -49,10 +44,8 @@ function login(email: string, pwd: string) {
         .then(token => {
             // store user details and jwt token in local storage to keep user logged in between page refreshes
             localStorage.setItem('currentUser', (token));
-            console.log("token is ", token)
             currentUserSubject.next(token);
             return token;
-      
         });
 }
 

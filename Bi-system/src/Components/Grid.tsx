@@ -1,5 +1,7 @@
 import * as React from "react";
 import styles from "./Grid.module.css";
+/*This code is adapted from: 
+https://github.com/rleija703/react-examples/blob/master/grid-component-with-typescript/src/components/Grid.tsx */
 
 /* This class makes the grid used in the website. 
 The parameters are used to alter the apparance and placement of the items in the grid. */
@@ -36,17 +38,8 @@ interface GridProps {
 }
 
 const Grid: React.FC<GridProps> = (props) => {
-  const {
-    alignItems,
-    children,
-    column,
-    expanded,
-    justify,
-    lg,
-    md,
-    row,
-    sm
-  } = props;
+  const { alignItems, children, column, expanded, justify, lg, md, row, sm } =
+    props;
 
   const isRow: boolean = row || !column;
 
