@@ -54,6 +54,7 @@ const EmployeeGender = () => {
         <PieChart width={1000} height={500}>
           <Pie
             data={data}
+            isAnimationActive={false}
             labelLine={true}
             label={renderLabel}
             outerRadius={80}

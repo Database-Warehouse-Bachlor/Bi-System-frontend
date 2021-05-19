@@ -233,7 +233,7 @@ function Dashboard() {
                 id="absenceRegisterDrop"
                 onSelect={handleSelectAbsence}
               >
-                 <Dropdown.Menu style={{backgroundColor:'#73a47'}}>
+                
                 <Dropdown.Item eventKey="Last 7 Days">
                   Siste 7 dager
                 </Dropdown.Item>
@@ -241,13 +241,12 @@ function Dashboard() {
                   Siste 30 dager
                 </Dropdown.Item>
                 <Dropdown.Item eventKey="Last 12 Months">
-                  {" "}
-                  Siste 12 Måneder{" "}
+                  Siste 12 Måneder
                 </Dropdown.Item>
                 <Dropdown.Divider />
                 <Dropdown.Item eventKey="thisYear"> Dette året </Dropdown.Item>
                 <Dropdown.Item eventKey="thisWeek"> Denne Uken </Dropdown.Item>
-                </Dropdown.Menu>
+          
               </DropdownButton>
               {/* Adding colums so that the title of the graph is on the right */}
               <h3></h3>
@@ -287,6 +286,19 @@ function Dashboard() {
           <Paper className={classes.blackPaper} elevation={10}>
             
           <h3 className ={classes.pieChart}>Kjønnsfordeling</h3> 
+          <EmployeeGender/>
+          </Paper>
+          </Grid>
+          <Grid
+          column={true}
+          sm={12}
+          md={4}
+          justify={"flex-end"}
+          alignItems={"flex-end"}
+        >
+          <Paper className={classes.blackPaper} elevation={10}>
+            
+          <h3 className ={classes.pieChart}>Filler</h3> 
           <EmployeeGender/>
           </Paper>
           </Grid>
