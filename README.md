@@ -6,7 +6,7 @@ An application used to show business related data form Cordel Norge's systems ba
 
 ## Project Status
 
-This project is an MVP. Its still in development, but our work on this project is finished.
+This project is a finished MVP. The project will be further developeloped by Cordel.
 
 ## Project Screen Shots
 
