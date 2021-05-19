@@ -12,6 +12,7 @@ import AbsenceWeekly from "../Components/AbsenceRegisters/AbsenceRegisterWeeklyC
 import AbsenceMontly from "../Components/AbsenceRegisters/AbsenceRegisterMonthlyChart";
 import AbsenceThisYear from "../Components/AbsenceRegisters/AbsenceRegisterChartThisYear";
 import AbsenceThisWeek from "../Components/AbsenceRegisters/AbsenceRegisterChartThisWeek";
+import ClientCity from "../Components/BarCharts/ClientCity";
 import "bootstrap/dist/css/bootstrap.min.css";
 import grey from "@material-ui/core/colors/grey";
 import AuthenticationService from "../Services/AuthenticationService";
@@ -267,7 +268,7 @@ function Dashboard() {
         <Grid
           column={true}
           sm={12}
-          md={4}
+          md={3}
           justify={"flex-end"}
           alignItems={"flex-end"}
         >
@@ -279,7 +280,7 @@ function Dashboard() {
           <Grid
           column={true}
           sm={12}
-          md={4}
+          md={3}
           justify={"flex-end"}
           alignItems={"flex-end"}
         >
@@ -292,14 +293,14 @@ function Dashboard() {
           <Grid
           column={true}
           sm={12}
-          md={4}
+          md={6}
           justify={"flex-end"}
           alignItems={"flex-end"}
         >
           <Paper className={classes.blackPaper} elevation={10}>
             
-          <h3 className ={classes.pieChart}>Filler</h3> 
-          <EmployeeGender/>
+          <h3 className ={classes.pieChart}>Kundelokasjoner</h3> 
+          <ClientCity/>
           </Paper>
           </Grid>
           
