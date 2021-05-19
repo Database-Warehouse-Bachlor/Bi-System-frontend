@@ -1,7 +1,6 @@
 
-import React from 'react';
 import Dashboard from '../Pages/Dashboard';
-import { render, cleanup, waitFor, act, screen } from '@testing-library/react';
+import { render, act } from '@testing-library/react';
 import '@testing-library/jest-dom';
 
 test("Renders Dashboard correctly", async () => {
@@ -15,6 +14,5 @@ test('Dropdown renders', async() =>{
   await act(async () => {
     const { getByTestId } = render(<Dashboard />);
     expect(getByTestId("dropDownButton")).toBeTruthy();
-
 });
 });

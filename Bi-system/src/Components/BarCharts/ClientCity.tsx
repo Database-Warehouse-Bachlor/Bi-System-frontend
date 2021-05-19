@@ -9,27 +9,10 @@ import {
   CartesianGrid,
   Tooltip,
   Legend,
-  LineChart,
-  Line,
   ResponsiveContainer,
 } from "recharts";
 
-const Abcense = () => {
-  // Sets the names of all the months
-  var monthsName = [
-    "Jan",
-    "Feb",
-    "Mar",
-    "Apr",
-    "May",
-    "Jun",
-    "Jul",
-    "Aug",
-    "Sep",
-    "Oct",
-    "Nov",
-    "Dec",
-  ];
+const ClientCity = () => {
   //Stores the chart data as a state
   const [chartData, setChartData] = useState();
 
@@ -37,8 +20,7 @@ const Abcense = () => {
     //Api call to the backend getting the information about Absence the last twelve months.
     //Authorizes using token stored in local storage.
     axios
-      .get("web/absence", {
-        params: { filter: "lastTwelveMonths" },
+      .get("web/customerzones", {
         headers: {
           Authorization:
             "bearer " + AuthenticationService.getCurrentUser("currentUser"),
@@ -46,16 +28,9 @@ const Abcense = () => {
       })
       .then((res) => {
         //Alters the Json data to fit the chart in a specific way.
-        var actualData = res.data;
-        var ExpectedData = actualData.map((obj: any) => {
-          // Get month number from date-string and then substract 1
-          var monthNum = parseInt(obj.month) - 1;
-          // Get month name from the array and adds years.
-          obj.month = monthsName[monthNum] + " " + obj.year;
-          // Return the object
-          return obj;
-        });
-        setChartData(ExpectedData);
+        var data = res.data;
+      
+        setChartData(data);
       })
       .catch((err) => {
         console.log(err);
@@ -68,11 +43,11 @@ const Abcense = () => {
 
   return (
     //Makes the Chart responsive
-    <ResponsiveContainer width="99%" height={300}>
+    <ResponsiveContainer width="99%" height={250}>
       {/* Generates a BarChart with the wanted data */}
       <BarChart
         width={1330}
-        height={280}
+        height={260}
         data={chartData}
         margin={{
           top: 5,
@@ -82,13 +57,13 @@ const Abcense = () => {
         }}
       >
         <CartesianGrid strokeDasharray="3 3" />
-        <XAxis dataKey="month" />
-        <YAxis dataKey="totalDuration" />
+        <XAxis dataKey="city" />
+        <YAxis dataKey="totalAmount" />
         <Tooltip />
         <Legend />
         <Bar
-          dataKey="totalDuration"
-          name="Fravær"
+          dataKey="totalAmount"
+          name="By"
           fill="#eb6707"
           stroke="#000000"
         />
@@ -97,4 +72,4 @@ const Abcense = () => {
   );
 };
 
-export default Abcense;
+export default ClientCity;

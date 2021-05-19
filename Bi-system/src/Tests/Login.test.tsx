@@ -1,4 +1,4 @@
-import { act, cleanup, render } from  '@testing-library/react';
+import { act, render } from  '@testing-library/react';
 import  Login from  '../Pages/Login';
 
 
